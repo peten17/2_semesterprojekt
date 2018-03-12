@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1520849036966
+Bnd-LastModified: 1520850424143
 Build-Jdk: 1.6.0_41
 Built-By: ur
 Bundle-Activator: com.GripperPlug.thenewapp.impl.Activator
