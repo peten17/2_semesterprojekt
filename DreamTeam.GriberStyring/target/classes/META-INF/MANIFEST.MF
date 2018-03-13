@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1520936626907
+Build-Jdk: 1.6.0_41
+Built-By: ur
+Bundle-Activator: DreamTeam.GriberStyring.impl.Activator
+Bundle-Category: URCap
+Bundle-ContactAddress: 123 URCap Street
+Bundle-Copyright: Copyright notice (C)
+Bundle-Description: This is a description of the URCap
+Bundle-LicenseType: License type
+Bundle-ManifestVersion: 2
+Bundle-Name: GriberStyring
+Bundle-SymbolicName: DreamTeam.GriberStyring
+Bundle-Vendor: URCaps R us Inc.
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Import-Package: org.osgi.framework;version="[1.6,2)"
+Tool: Bnd-2.1.0.20130426-122213
