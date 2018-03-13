@@ -14,6 +14,6 @@ import com.sun.xml.internal.ws.api.server.InstanceResolverAnnotation;
  *
  * @author Kasper_Melddgaard
  */
-public class GripperControlInstallationService implements {
+public class GripperControlInstallationService {
 
 }
