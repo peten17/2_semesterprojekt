@@ -136,6 +136,11 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+	 <dependency>
+	  <groupId>DreamTeam</groupId>
+	  <artifactId>Com</artifactId>
+	  <version>1</version>
+	 </dependency>
 	</dependencies>
 
 	<profiles>
