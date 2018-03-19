@@ -1,17 +1,20 @@
 package DreamTeam.GriberStyring.impl;
 
+import com.ur.urcap.api.contribution.InstallationNodeService;
+import com.ur.urcap.api.contribution.ProgramNodeService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import dk.sdu.mmmi.rd1.robotcomm.RobotClient;
 
 /**
- * Hello world activator for the OSGi bundle URCAPS contribution
+ *
  *
  */
 public class Activator implements BundleActivator {
 	@Override
 	public void start(final BundleContext context) throws Exception {
 		GripperControlInstallationService gripperControlInstallationservice = new GripperControlInstallationService();
+                
+                context.registerService(InstallationNodeService.class, gripperControlInstallationservice, null);
                 
                 /*bundleContext.registerService(type, this, dctnr);*/
 	}

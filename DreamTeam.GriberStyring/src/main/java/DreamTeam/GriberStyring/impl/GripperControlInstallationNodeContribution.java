@@ -12,6 +12,7 @@ import com.ur.urcap.api.ui.component.InputTextField;
  * @author Kasper_Melddgaard
  */
 public class GripperControlInstallationNodeContribution implements InstallationNodeContribution {
+    
     private static final String IP_KEY = "ip";
     private static final String PORT_KEY = "port";
     private static final String DEFAULT_IP = "000.000.000.000";
