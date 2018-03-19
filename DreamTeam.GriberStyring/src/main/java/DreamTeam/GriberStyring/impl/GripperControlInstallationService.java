@@ -1,7 +1,5 @@
 package DreamTeam.GriberStyring.impl;
 
-import com.sun.xml.internal.ws.api.server.InstanceResolverAnnotation;
-
 import com.ur.urcap.api.contribution.InstallationNodeContribution;
 import com.ur.urcap.api.contribution.InstallationNodeService;
 import com.ur.urcap.api.domain.URCapAPI;
@@ -14,6 +12,22 @@ import com.ur.urcap.api.domain.data.DataModel;
  *
  * @author Kasper_Melddgaard
  */
-public class GripperControlInstallationService {
+public class GripperControlInstallationService implements InstallationNodeService {
+
+    @Override
+    public String getTitle() {
+        return "Gripper Control"; 
+    }
+
+    @Override
+    public InputStream getHTML() {
+        InputStream is = this.getClass().getResourceAsStream("/DreamTeam.GriberStyring/src/main/resources/HTML/impl/installation.html");
+        return is;
+    }
+
+    @Override
+    public InstallationNodeContribution createInstallationNode(URCapAPI urcapi, DataModel dm) {
+        return new GripperControlInstallationNodeContribution(dm);
+    }
 
 }
