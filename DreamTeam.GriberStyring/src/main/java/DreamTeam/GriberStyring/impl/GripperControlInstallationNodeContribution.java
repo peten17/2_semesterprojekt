@@ -13,8 +13,8 @@ import com.ur.urcap.api.ui.component.InputTextField;
  */
 public class GripperControlInstallationNodeContribution implements InstallationNodeContribution {
     
-    private static final String IP_KEY = "ip";
-    private static final String PORT_KEY = "port";
+    private static final String IP_KEY = "setIP";
+    private static final String PORT_KEY = "setPort";
     private static final String DEFAULT_IP = "000.000.000.000";
     private static final String DEFAULT_PORT = "1";
     private DataModel model;
@@ -24,7 +24,10 @@ public class GripperControlInstallationNodeContribution implements InstallationN
         
     }
     
+    @Input(id = IP_KEY)
     private InputTextField ipAddress;
+    
+    @Input(id = PORT_KEY)
     private InputTextField portNum;
     
     public void setIP(String ip){
@@ -35,9 +38,36 @@ public class GripperControlInstallationNodeContribution implements InstallationN
         }
     }
     
+    public String getIP(){
+        if (!model.isSet(IP_KEY)){
+            this.resetIP();
+        }
+        return model.get(IP_KEY, DEFAULT_IP);
+    }
+    
     public void resetIP(){
         ipAddress.setText(DEFAULT_IP);
         model.set(IP_KEY, DEFAULT_IP);
+    }
+    
+    public void setPort(String port){
+        if ("".equals(port)){
+            resetPort();
+        } else{
+            model.set(PORT_KEY, port);
+        }
+    }
+    
+    public void resetPort(){
+        portNum.setText(DEFAULT_PORT);
+        model.set(PORT_KEY, DEFAULT_PORT);
+    }
+    
+    public String getPort(){
+        if (!model.isSet(PORT_KEY)){
+            this.resetPort();
+        }
+        return model.get(PORT_KEY, DEFAULT_PORT);
     }
 
     @Override
@@ -51,7 +81,8 @@ public class GripperControlInstallationNodeContribution implements InstallationN
 
     @Override
     public void generateScript(ScriptWriter writer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        writer.assign("Grip_Controller_IP", "\"" +  this.getIP() + "\"");
+//        writer.assign("Grip_Controller_Port", "\"" + )
     }
     
 
