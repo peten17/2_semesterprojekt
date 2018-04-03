@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1522740517504
+Bnd-LastModified: 1522742877865
 Build-Jdk: 1.6.0_41
 Built-By: ur
 Bundle-Activator: DreamTeam.GriberStyring.impl.Activator
