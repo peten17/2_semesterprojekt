@@ -15,6 +15,7 @@ public class Activator implements BundleActivator {
 		GripperControlInstallationService gripperControlInstallationservice = new GripperControlInstallationService();
                 
                 context.registerService(InstallationNodeService.class, gripperControlInstallationservice, null);
+                //context.registerService(ProgramNodeService.class, new GripperControlInstallationService(), null);
                 
                 /*bundleContext.registerService(type, this, dctnr);*/
 	}
