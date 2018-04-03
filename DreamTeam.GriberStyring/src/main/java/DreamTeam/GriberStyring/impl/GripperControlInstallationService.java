@@ -21,7 +21,7 @@ public class GripperControlInstallationService implements InstallationNodeServic
 
     @Override
     public InputStream getHTML() {
-        InputStream is = this.getClass().getResourceAsStream("/DreamTeam.GriberStyring/src/main/resources/HTML/impl/installation.html");
+        InputStream is = this.getClass().getResourceAsStream("/src/main/resources/HTML/impl/installation.html");
         return is;
     }
 
