@@ -82,7 +82,7 @@ public class GripperControlInstallationNodeContribution implements InstallationN
     @Override
     public void generateScript(ScriptWriter writer) {
         writer.assign("Grip_Controller_IP", "\"" +  this.getIP() + "\"");
-//        writer.assign("Grip_Controller_Port", "\"" + )
+        writer.assign("Grip_Controller_Port", "\"" + this.getPort() + "\"" );
     }
     
 
