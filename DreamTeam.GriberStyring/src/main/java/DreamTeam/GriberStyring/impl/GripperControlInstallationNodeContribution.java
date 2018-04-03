@@ -72,7 +72,8 @@ public class GripperControlInstallationNodeContribution implements InstallationN
 
     @Override
     public void openView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ipAddress.setText(getIP());
+        portNum.setText(getPort());
     }
 
     @Override
