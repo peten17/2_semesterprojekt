@@ -72,7 +72,7 @@ public class GripperControlInstallationNodeContribution implements InstallationN
 
     @Override
     public void openView() {
-        ipAddress.setText(getIP());
+//        ipAddress.setText(getIP());
         portNum.setText(getPort());
     }
 
