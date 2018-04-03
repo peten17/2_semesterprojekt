@@ -39,9 +39,9 @@ public class GripperControlInstallationNodeContribution implements InstallationN
     }
     
     public String getIP(){
-        if (!model.isSet(IP_KEY)){
-            this.resetIP();
-        }
+//        if (!model.isSet(IP_KEY)){
+//            this.resetIP();
+//        }
         return model.get(IP_KEY, DEFAULT_IP);
     }
     
