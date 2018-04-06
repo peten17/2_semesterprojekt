@@ -30,19 +30,19 @@ public class GripperControlInstallationNodeContribution implements InstallationN
     @Input(id = PORT_KEY)
     private InputTextField portNum;
     
-    @Input(id = IP_KEY)
-    public void onIPChange(InputEvent event) {
-		if (event.getEventType() == InputEvent.EventType.ON_CHANGE) {
-			setIP(ipAddress.getText());
-		}
-	}
-    
-        @Input(id = PORT_KEY)
-    public void onPortChange(InputEvent event) {
-		if (event.getEventType() == InputEvent.EventType.ON_CHANGE) {
-			setIP(portNum.getText());
-		}
-	}
+//    @Input(id = IP_KEY)
+//    public void onIPChange(InputEvent event) {
+//		if (event.getEventType() == InputEvent.EventType.ON_CHANGE) {
+//			setIP(ipAddress.getText());
+//		}
+//	}
+//    
+//        @Input(id = PORT_KEY)
+//    public void onPortChange(InputEvent event) {
+//		if (event.getEventType() == InputEvent.EventType.ON_CHANGE) {
+//			setIP(portNum.getText());
+//		}
+//	}
         
     public void setIP(String ip){
         if("".equals(ip)){
@@ -60,7 +60,7 @@ public class GripperControlInstallationNodeContribution implements InstallationN
     }
     
     public void resetIP(){
-        ipAddress.setText("000");
+        ipAddress.setText(DEFAULT_IP);
         model.set(IP_KEY, DEFAULT_IP);
     }
     
