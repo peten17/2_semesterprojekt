@@ -43,7 +43,6 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		// TODO Auto-generated method stub
-		writer.;
 	}
 	
 }
