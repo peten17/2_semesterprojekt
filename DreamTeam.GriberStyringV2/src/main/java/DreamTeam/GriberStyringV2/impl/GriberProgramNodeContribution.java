@@ -12,6 +12,8 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	
 	private final DataModel model;
 	private final URCapAPI api;
+	private final String popupTitle = "Popup";
+	private final String message = "PopPop";
 	
 	public GriberProgramNodeContribution(DataModel model, URCapAPI api){
 		this.model = model;
@@ -42,8 +44,9 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public void generateScript(ScriptWriter writer) {
-		// TODO Auto-generated method stub
-		writer.;
+		// Create a URscript that connects to IP+Socket of RPI
+		writer.appendLine();
+		writer.appendLine();
 	}
 	
 }
