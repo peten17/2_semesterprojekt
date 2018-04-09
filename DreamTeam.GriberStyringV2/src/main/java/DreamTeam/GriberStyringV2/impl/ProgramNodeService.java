@@ -22,7 +22,7 @@ public class ProgramNodeService implements com.ur.urcap.api.contribution.Program
 
 	@Override
 	public boolean isChildrenAllowed() {
-		return true;
+		return false;
 	}
 
 	@Override

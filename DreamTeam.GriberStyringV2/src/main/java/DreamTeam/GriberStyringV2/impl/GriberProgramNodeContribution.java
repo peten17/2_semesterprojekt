@@ -12,8 +12,8 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	
 	private final DataModel model;
 	private final URCapAPI api;
-	private final String popupTitle = "Popup";
-	private final String message = "PopPop";
+	private final String popupTitle = "Popup: ";
+	private final String message = "It's a popup";
 	
 	public GriberProgramNodeContribution(DataModel model, URCapAPI api){
 		this.model = model;
@@ -45,8 +45,11 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		// Create a URscript that connects to IP+Socket of RPI
-		writer.appendLine();
-		writer.appendLine();
+		writer.assign("message","\"" + message + "\"");
+		writer.assign("Title", "\"" + popupTitle + "\"");
+		writer.appendLine("textmsg(Title, message)");
+		writer.appendLine("");
+		//writer.appendLine("popup(\"" + message + "\", Title, False, False, blocking=True)");
 	}
 	
 }
