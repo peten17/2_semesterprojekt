@@ -13,6 +13,8 @@ public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		bundleContext.registerService(ProgramNodeService.class, new DreamTeam.GriberStyringV2.impl.ProgramNodeService(), null);
+		bundleContext.registerService(ProgramNodeService.class, new OpenNodeService(), null);
+		bundleContext.registerService(ProgramNodeService.class, new CloseNodeService(), null);
 	}
 
 	@Override
