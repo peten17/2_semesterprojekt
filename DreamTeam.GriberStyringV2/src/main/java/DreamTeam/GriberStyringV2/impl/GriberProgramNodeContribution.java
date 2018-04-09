@@ -26,19 +26,19 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public void closeView() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
+		
 		return "Griber";
 	}
 
 	@Override
 	public boolean isDefined() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
