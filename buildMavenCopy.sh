@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /DreamTeam.GriberStyringV2
 mvn install
 
