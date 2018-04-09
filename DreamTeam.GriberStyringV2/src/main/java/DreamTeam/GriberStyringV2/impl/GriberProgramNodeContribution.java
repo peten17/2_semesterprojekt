@@ -31,7 +31,7 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public String getTitle() {
 		
-		return "Griber2";
+		return "Griber";
 	}
 
 	@Override
