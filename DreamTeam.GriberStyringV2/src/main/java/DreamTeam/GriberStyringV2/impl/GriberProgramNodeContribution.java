@@ -16,18 +16,25 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	/*------Button/HTML handling variables--------*/
 	private final String OPEN_TEMPLATE = "Open";
 	private final String CLOSE_TEMPLATE = "Close";
+	private final String RESET_TEMPLATE = "Reset";
 	private final String BUTTON_OPEN_ID = "buttonOpen";
 	private final String BUTTON_CLOSE_ID = "buttonClose";
+	private final String BUTTON_RESET_ID = "buttonReset";
 	
 	//Node id holder for model
 	private final String NODE_KEY = "NodeType";
+	private final String DEFAULT_NAME = "Socket Gripper";
 	
 	@Input(id = OPEN_TEMPLATE)
 	public InputButton buttonOpen;
 
-//	@Input(id = CLOSE_TEMPLATE)
-//	public InputButton buttonClose;
+	@Input(id = CLOSE_TEMPLATE)
+	public InputButton buttonClose;
 	
+	@Input(id = RESET_TEMPLATE)
+	public InputButton buttonReset;
+
+	/*------------------------------------*/
 	//On press events:
 	@Input (id = BUTTON_OPEN_ID)
 	public void buttonOpenClick(InputEvent event){
@@ -36,15 +43,20 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		}
 	}
 	
-//	@Input (id = BUTTON_CLOSE_ID)
-//	public void buttonCloseClick(InputEvent event){
-//		if (event.getEventType() == InputEvent.EventType.ON_PRESSED){
-//			model.set(NODE_KEY, CLOSE_TEMPLATE);
-//		}
-//	}
+	@Input (id = BUTTON_CLOSE_ID)
+	public void buttonCloseClick(InputEvent event){
+		if (event.getEventType() == InputEvent.EventType.ON_PRESSED){
+			model.set(NODE_KEY, CLOSE_TEMPLATE);
+		}
+	}
 	
 	public void updateView(){ //TODO: update enabled
-		
+		int childCnt =
+				api.getProgramModel().getRootTreeNode(this).getChildren().size();
+		boolean emptyTree = (childCnt==0);
+		buttonClose.setEnabled(emptyTree);
+		buttonOpen.setEnabled(emptyTree);
+		buttonReset.setEnabled(!emptyTree);
 	}
 	
 	
@@ -77,7 +89,7 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	public String getTitle() {
 		
 		//return "Socket Gripper";
-		return model.get(NODE_KEY, "Socket Gripper");
+		return model.get(NODE_KEY, DEFAULT_NAME);
 	}
 
 	@Override
