@@ -6,6 +6,7 @@ import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.ui.annotation.Input;
 import com.ur.urcap.api.ui.component.InputButton;
+import com.ur.urcap.api.ui.component.InputEvent;
 
 public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	
@@ -13,14 +14,40 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	private final URCapAPI api;
 	
 	/*------Button/HTML handling variables--------*/
-//	private final String BUTTON_OPEN_ID = "Open";
-//	private final String BUTTON_CLOSE_ID = "Close";
-//	
-//	@Input(id = BUTTON_OPEN_ID)
-//	public InputButton buttonOpen;
-//
-//	@Input(id = BUTTON_CLOSE_ID)
+	private final String OPEN_TEMPLATE = "Open";
+	private final String CLOSE_TEMPLATE = "Close";
+	private final String BUTTON_OPEN_ID = "buttonOpen";
+	private final String BUTTON_CLOSE_ID = "buttonClose";
+	
+	//Node id holder for model
+	private final String NODE_KEY = "NodeType";
+	
+	@Input(id = OPEN_TEMPLATE)
+	public InputButton buttonOpen;
+
+//	@Input(id = CLOSE_TEMPLATE)
 //	public InputButton buttonClose;
+	
+	//On press events:
+	@Input (id = BUTTON_OPEN_ID)
+	public void buttonOpenClick(InputEvent event){
+		if (event.getEventType() == InputEvent.EventType.ON_PRESSED){
+			model.set(NODE_KEY, OPEN_TEMPLATE);
+		}
+	}
+	
+//	@Input (id = BUTTON_CLOSE_ID)
+//	public void buttonCloseClick(InputEvent event){
+//		if (event.getEventType() == InputEvent.EventType.ON_PRESSED){
+//			model.set(NODE_KEY, CLOSE_TEMPLATE);
+//		}
+//	}
+	
+	public void updateView(){ //TODO: update enabled
+		
+	}
+	
+	
 	/*--------------------------------------------*/
 	
 	
@@ -49,7 +76,8 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public String getTitle() {
 		
-		return "Griber";
+		//return "Socket Gripper";
+		return model.get(NODE_KEY, "Socket Gripper");
 	}
 
 	@Override
@@ -68,9 +96,9 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + message + "\"");
 		writer.appendLine("textmsg(Title, message)");
-		writer.appendLine("socket_open(IP, port, socketName)");
-		writer.appendLine("socket_send_string(command, socketName)");
-		writer.appendLine("socket_close(socketName)");
+//		writer.appendLine("socket_open(IP, port, socketName)");
+//		writer.appendLine("socket_send_string(command, socketName)");
+//		writer.appendLine("socket_close(socketName)");
 		//writer.appendLine("popup(\"" + message + "\", Title, False, False, blocking=True)");
 	}
 	
