@@ -77,7 +77,7 @@ int main()
         else if(inputMenu == 2)
         {
             Server c;
-            c.serverBind();*/
+            c.serverBind();
             while(inputPoly != "Stop")
             {
                 inputPoly(c.serverListen());
