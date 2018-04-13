@@ -50,14 +50,16 @@ int main()
                 if(input > 2000 && input != 2001)
                 {
                     cout << "Invalid input. Duty cycle set to maximum.";
-                    pwmWrite(18, 2000);
                     cout << "Current duty cycle: " << "100" << "%" << endl;
+                    pwmWrite(18, 2000);
+
                 }
                 else if(input < 0)
                 {
                     cout << "Invalid input. Duty cycle set to minimum.";
-                    pwmWrite(18, 0);
                     cout << "Current duty cycle: " << "0" << "%" << endl;
+                    pwmWrite(18, 0);
+
                 }
                 else if(input == 2001)
                 {
@@ -65,9 +67,8 @@ int main()
                 }
                 else
                 {
-                    cout << "Current duty cycle: " << (buf/2000)*100 << "%" << endl;
-
                     pwmWrite(18, input);
+                    cout << "Current duty cycle: " << (buf/2000)*100 << "%" << endl;
                     delay(2000);
                 }
 
