@@ -12,7 +12,7 @@ int main()
     cout << hest << endl;
 
     int input = 0, inputMenu = 0;
-    string buf;
+    string *buf;
     double buf;
 
     wiringPiSetupGpio();
@@ -105,14 +105,10 @@ int main()
                 {
                     break;
                 }
-            }while(inputPoly != "Stop");
-        }
-        else
-        {
-            break;
+            }while(buf != "Stop");
         }
     }
-    while(buf != 3);
+    while(input != 3);
 
     return 0;
 }
