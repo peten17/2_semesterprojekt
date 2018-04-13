@@ -12,7 +12,7 @@ int main()
     cout << hest << endl;
 
     int input = 0, inputMenu = 0;
-    string *buf;
+    string *bufS;
     double buf;
 
     wiringPiSetupGpio();
@@ -80,7 +80,7 @@ int main()
             do
             {
                 string inputPoly(c.serverListen());
-                buf = inputPoly;
+                bufS = inputPoly;
                 if(inputPoly == "Open")
                 {
                     pwmWrite(18, 200);
@@ -105,7 +105,7 @@ int main()
                 {
                     break;
                 }
-            }while(buf != "Stop");
+            }while(bufS != "Stop");
         }
     }
     while(input != 3);
