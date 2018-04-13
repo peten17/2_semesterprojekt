@@ -1,5 +1,5 @@
-//#include <wiringPi.h>
-//#include <server.h>
+#include <wiringPi.h>
+#include <server.h>
 #include <open62541.h>
 #include <iostream>
 
