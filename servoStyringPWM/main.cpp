@@ -80,6 +80,7 @@ int main()
             do
             {
                 string inputPoly(c.serverListen());
+                buf = inputPoly;
                 if(inputPoly == "Open")
                 {
                     pwmWrite(18, 200);
@@ -111,7 +112,7 @@ int main()
             break;
         }
     }
-    while(inputMenu != 3);
+    while(buf != 3);
 
     return 0;
 }
