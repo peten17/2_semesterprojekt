@@ -15,7 +15,7 @@ class Server
 {
 public:
     Server();
-    Server(char *hello, const int port, const char ip);
+    Server(char *hello, const int port, const char ip[15]);
 
     std::string serverListen();
     void serverBind();
