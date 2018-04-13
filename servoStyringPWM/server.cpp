@@ -21,7 +21,7 @@ Server::Server(char *hello, const int port, const char ip[15])
     inet_pton(_address.sin_family, ip, &(_address.sin_addr));
 }
 
-Server::serverBind()
+void Server::serverBind()
 {
     // Creating socket file descriptor
     // socket(int DOMAIN, int TYPE, int PROTOCOL)

@@ -12,7 +12,7 @@ int main()
     cout << hest << endl;
 
     int input = 0, inputMenu = 0;
-
+    string buf;
     double buf;
 
     wiringPiSetupGpio();
@@ -77,7 +77,7 @@ int main()
         {
             Server c;
             c.serverBind();
-            while(inputPoly != "Stop")
+            do
             {
                 string inputPoly(c.serverListen());
                 if(inputPoly == "Open")
@@ -104,7 +104,7 @@ int main()
                 {
                     break;
                 }
-            }
+            }while(inputPoly != "Stop");
         }
         else
         {
