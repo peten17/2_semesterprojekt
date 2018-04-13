@@ -79,7 +79,7 @@ int main()
             boolean t;
             c.serverBind();
             string inputPoly(c.serverListen());
-            while(t)
+            while(t = true)
             {
                 if(inputPoly == "Open")
                 {
