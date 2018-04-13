@@ -1,18 +1,17 @@
-#include <wiringPi.h>
+/*#include <wiringPi.h>
 #include <server.h>
-#include <open62541.h>
+#include <open62541.h>*/
 #include <iostream>
 
 using namespace std;
 
 int main()
-{
+{/*
     UA_Int16 hest;
     hest = 15;
     cout << hest << endl;
 
     int input = 0, inputMenu = 0;
-    string *bufS;
     double buf;
 
     wiringPiSetupGpio();
@@ -109,6 +108,7 @@ int main()
             }
         }
     }
-    while(input != 3);
+    while(input != 3);*/
     return 0;
 }
+

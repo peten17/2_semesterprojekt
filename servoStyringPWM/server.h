@@ -1,4 +1,4 @@
-#ifndef SERVER_H
+/*#ifndef SERVER_H
 #define SERVER_H
 
 #include <stdio.h>
@@ -29,4 +29,4 @@ private:
    char *_hello;
 };
 
-#endif // SERVER_H
+#endif // SERVER_H*/
