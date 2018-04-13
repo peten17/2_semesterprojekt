@@ -76,11 +76,11 @@ int main()
         else if(inputMenu == 2)
         {
             Server c;
+            boolean t;
             c.serverBind();
-            do
+            string inputPoly(c.serverListen());
+            while(t)
             {
-                string inputPoly(c.serverListen());
-                bufS = inputPoly;
                 if(inputPoly == "Open")
                 {
                     pwmWrite(18, 200);
@@ -99,16 +99,15 @@ int main()
                 {
                     cout << "The program has finished." << endl;
                     pwmWrite(18, 150);
-                    break;
+                    t = false;
                 }
                 else
                 {
-                    break;
+                    t = false;
                 }
-            }while(bufS != "Stop");
+            }
         }
     }
     while(input != 3);
-
     return 0;
 }
