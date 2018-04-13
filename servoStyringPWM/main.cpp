@@ -76,7 +76,7 @@ int main()
         else if(inputMenu == 2)
         {
             Server c;
-            boolean t;
+            bool t;
             c.serverBind();
             string inputPoly(c.serverListen());
             while(t = true)
