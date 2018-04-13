@@ -1,4 +1,4 @@
-#include "Server.h"
+#include "server.h"
 
 #define PORT 8080
 Server::Server()
@@ -104,6 +104,3 @@ std::string Server::serverListen()
 
     return _buffer;
 }
-
-
-

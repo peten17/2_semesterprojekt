@@ -7,6 +7,7 @@ SOURCES += main.cpp \
     server.cpp
 
 INCLUDEPATH += C:\Users\vikpo\Desktop\Libaries\wiringPi
+INCLUDEPATH += C:\Users\vikpo\Desktop\Libaries\open62541-win64\build
 
 HEADERS += \
-    Server.h
+    server.h
