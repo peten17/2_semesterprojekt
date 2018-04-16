@@ -2,12 +2,13 @@ package DreamTeam.GriberStyringV2.impl;
 
 import java.io.InputStream;
 
+import com.ur.urcap.api.contribution.NonUserInsertable;
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.ProgramNodeService;
 import com.ur.urcap.api.domain.URCapAPI;
 import com.ur.urcap.api.domain.data.DataModel;
 
-public class OpenNodeService implements ProgramNodeService {
+public class OpenNodeService implements ProgramNodeService, NonUserInsertable {
 	
 	public OpenNodeService(){
 	}

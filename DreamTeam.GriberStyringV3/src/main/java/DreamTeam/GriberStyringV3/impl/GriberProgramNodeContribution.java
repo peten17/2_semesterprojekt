@@ -1,4 +1,4 @@
-package DreamTeam.GriberStyringV2.impl;
+package DreamTeam.GriberStyringV3.impl;
 
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.ProgramNodeService;
@@ -30,7 +30,7 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	
 	//Node id holder for model
 	private final String NODE_NAME = "NodeType";
-	private final String DEFAULT_NAME = "Socket Gripper";
+	private final String DEFAULT_NAME = "Socket Gripper V3";
 	
 	//IP/port DataModel holders
 	private final String IP_KEY = "IP";
@@ -230,10 +230,13 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		writer.assign("portString", "\" " + Integer.toString(getPortIn()) + "\"");
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + message + "\"");
+		writer.assign("controllerTemp", "0");
 		
+		writer.appendLine("controllerTemp = get_controller_temp()");
 		writer.appendLine("textmsg(Title, message)");
 		writer.appendLine("textmsg(Title, IP)");
 		writer.appendLine("textmsg(Title, port)");
+		writer.appendLine("textmsg(Title, controllerTemp)");
 		
 		writer.writeChildren();
 //		writer.appendLine("socket_open(IP, port, socketName)");

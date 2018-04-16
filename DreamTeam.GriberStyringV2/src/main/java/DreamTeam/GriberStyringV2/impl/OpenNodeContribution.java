@@ -9,10 +9,10 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 	
 	/*--------- Send to server variables ---------*/
 	private final String popupTitle = "From Open Node: ";
-	private final String message = "I will ask to open gripper";
+	private final String message = "Open script executing";
 	private final String command = "Open";
-	private final String IPAdd = "10.125.45.176";
-	private final int port = 8080;
+	private final String STATIC_IP_ADD = "10.125.45.176";
+	private final int STATIC_Port = 8080;
 	private final String socketName = "my_socket";
 	/*--------------------------------------------*/
 	
@@ -46,11 +46,13 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 	public void generateScript(ScriptWriter writer) {
 		writer.assign("message","\"" + message + "\"");
 		writer.assign("Title", "\"" + popupTitle + "\"");
-		writer.assign("IP", "\"" + IPAdd + "\"");
-		writer.assign("port", Integer.toString(port));
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + message + "\"");
+		
+		//log
 		writer.appendLine("textmsg(Title, message)");
+		
+		//attempt connection + send command to server
 		writer.appendLine("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
 		writer.appendLine("socket_close(socketName)");

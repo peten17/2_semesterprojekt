@@ -1,4 +1,4 @@
-package DreamTeam.GriberStyringV2.impl;
+package DreamTeam.GriberStyringV3.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -13,7 +13,7 @@ import com.ur.urcap.api.contribution.ProgramNodeService;
 public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		bundleContext.registerService(ProgramNodeService.class, new DreamTeam.GriberStyringV2.impl.ProgramNodeService(), null);
+		bundleContext.registerService(ProgramNodeService.class, new DreamTeam.GriberStyringV3.impl.ProgramNodeService(), null);
 		bundleContext.registerService(ProgramNodeService.class, new OpenNodeService(), null);
 		bundleContext.registerService(ProgramNodeService.class, new CloseNodeService(), null);
 	}

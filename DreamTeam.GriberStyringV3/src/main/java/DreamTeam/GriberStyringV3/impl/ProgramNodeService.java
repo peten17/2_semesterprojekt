@@ -1,21 +1,18 @@
-package DreamTeam.GriberStyringV2.impl;
+package DreamTeam.GriberStyringV3.impl;
 
 import java.io.InputStream;
 
-import com.ur.urcap.api.contribution.NonUserInsertable;
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
-import com.ur.urcap.api.contribution.ProgramNodeService;
 import com.ur.urcap.api.domain.URCapAPI;
 import com.ur.urcap.api.domain.data.DataModel;
 
-public class CloseNodeService implements ProgramNodeService, NonUserInsertable{
+public class ProgramNodeService implements com.ur.urcap.api.contribution.ProgramNodeService {
 	
-	public CloseNodeService() {
-	}
+	public ProgramNodeService() {}
 
 	@Override
 	public String getId() {
-		return "Close Node";
+		return "ǴriberStyringNode";
 	}
 
 	@Override
@@ -25,23 +22,23 @@ public class CloseNodeService implements ProgramNodeService, NonUserInsertable{
 
 	@Override
 	public boolean isChildrenAllowed() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public String getTitle() {
-		return "Close Node";
+		return "GriberStyringV3";
 	}
 
 	@Override
 	public InputStream getHTML() {
-		InputStream is = this.getClass().getResourceAsStream("/html/CloseNode.html");
+		InputStream is = this.getClass().getResourceAsStream("/html/ProgramNode.html");
 		return is;
 	}
 
 	@Override
 	public ProgramNodeContribution createNode(URCapAPI api, DataModel model) {
-		return new CloseNodeContribution(model, api);
+		return new DreamTeam.GriberStyringV3.impl.GriberProgramNodeContribution(model, api);
 	}
 
 }

@@ -6,9 +6,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>DreamTeam</groupId>
-	<artifactId>GriberStyringV2</artifactId>
-	<version>2.3-SNAPSHOT</version>
-	<name>GriberStyringV2</name>
+	<artifactId>GriberStyringV3</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>GriberStyringV3</name>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -18,11 +18,11 @@
 		<!--         that comes along with your URCap                           -->
 		<!--********************************************************************-->
 		<!--******************* BEGINNING OF URCAP META DATA *******************-->
-		<urcap.symbolicname>DreamTeam.GriberStyringV2</urcap.symbolicname>
-		<urcap.vendor>Kasper R Meldgaard</urcap.vendor>
+		<urcap.symbolicname>DreamTeam.GriberStyringV3</urcap.symbolicname>
+		<urcap.vendor>Kasper Meldgaard</urcap.vendor>
 		<urcap.contactAddress>Legends Lane 1</urcap.contactAddress>
 		<urcap.copyright>Copyright notice (C)</urcap.copyright>
-		<urcap.description>description</urcap.description>
+		<urcap.description>Further development of GriberStyringV3</urcap.description>
 		<urcap.licenseType>License type</urcap.licenseType>
 		<!--********************** END OF URCAP META DATA **********************-->
 		<!--********************************************************************-->
@@ -78,7 +78,7 @@
 					<instructions>
 						<!--********** DO NOT MODIFY THE ENTRIES OF THIS SECTION **********-->
 						<Bundle-Category>URCap</Bundle-Category>
-						<Bundle-Activator>DreamTeam.GriberStyringV2.impl.Activator</Bundle-Activator>
+						<Bundle-Activator>DreamTeam.GriberStyringV3.impl.Activator</Bundle-Activator>
 						<Bundle-Vendor>${urcap.vendor}</Bundle-Vendor>
 						<Bundle-ContactAddress>${urcap.contactAddress}</Bundle-ContactAddress>
 						<Bundle-Copyright>${urcap.copyright}</Bundle-Copyright>
@@ -256,10 +256,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<description>Enables insertion of open/close node
-will send signal to
-IP:10.125.45.176
-Port: 8080
-
-Final Version 2</description>
 </project>
