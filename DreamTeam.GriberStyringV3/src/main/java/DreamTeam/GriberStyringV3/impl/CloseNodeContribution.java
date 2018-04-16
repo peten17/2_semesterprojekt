@@ -111,7 +111,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("socket_close(socketName)");
 		
 		//insert wait on script level
-		writer.appendLine("sleep(0.5)");
+		//writer.appendLine("sleep(0.5)");
 	}
 
 }

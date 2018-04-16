@@ -230,13 +230,13 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		writer.assign("portString", "\" " + Integer.toString(getPortIn()) + "\"");
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + message + "\"");
-		writer.assign("controllerTemp", "0");
+//		writer.assign("controllerTemp", "0");
 		
 		//writer.appendLine("controllerTemp = get_controller_temp()");
 		writer.appendLine("textmsg(Title, message)");
 		writer.appendLine("textmsg(Title, IP)");
 		writer.appendLine("textmsg(Title, port)");
-		writer.appendLine("textmsg(Title, controllerTemp)");
+//		writer.appendLine("textmsg(Title, controllerTemp)");
 		
 		writer.writeChildren();
 //		writer.appendLine("socket_open(IP, port, socketName)");
