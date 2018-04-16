@@ -232,7 +232,7 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		writer.assign("command", "\"" + message + "\"");
 		writer.assign("controllerTemp", "0");
 		
-		writer.appendLine("controllerTemp = get_controller_temp()");
+		//writer.appendLine("controllerTemp = get_controller_temp()");
 		writer.appendLine("textmsg(Title, message)");
 		writer.appendLine("textmsg(Title, IP)");
 		writer.appendLine("textmsg(Title, port)");
