@@ -105,7 +105,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		writer.assign("command", "\"" + message + "\"");
 		writer.assign("force", "\"" + force + "\"");
 		writer.appendLine("textmsg(Title, message)");
-		writer.appendLine("textmsg(\"Forcé: \", force)");
+		writer.appendLine("textmsg(\"Force: \", force)");
 		writer.appendLine("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
 		writer.appendLine("socket_close(socketName)");
