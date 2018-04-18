@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+ 		input {
+			width: 200px;
+			height: 40px;
+			font-size: 18px;
+			text-align: right;
+		}
+		div {
+			padding-top: 10px;
+			padding-left: 20px;
+			 padding-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+<div>
+	<h2>You succesfully inserted the node V2.3!</h2>
+	<h3>Select Node Type</h3>
+</div>
+<form>
+	<div>
+ 		<p>Type IP of gripper controller:</p>
+		<input type="text" id="ipInput"/>
+		<p>Type port of gripper controller</p>
+		<input type="number" id="portInput"/>
+	</div>
+	<div>
+		<input type="button" id="buttonOpen" value="Make Open Node"/>
+		<input type="button" id="buttonClose" value="Make Close Node"/>
+	</div>
+	<div>
+		<p>Press to reset node</p>
+		<input type="button" id="buttonReset" value="Reset"/>
+	</div>
+</form>
+</body>
+</html>

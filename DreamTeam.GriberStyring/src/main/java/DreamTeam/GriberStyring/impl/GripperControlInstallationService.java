@@ -14,6 +14,8 @@ import com.ur.urcap.api.domain.data.DataModel;
  */
 public class GripperControlInstallationService implements InstallationNodeService {
 
+	public GripperControlInstallationService() {}
+	
     @Override
     public String getTitle() {
         return "Gripper Control"; 
@@ -21,13 +23,13 @@ public class GripperControlInstallationService implements InstallationNodeServic
 
     @Override
     public InputStream getHTML() {
-        InputStream is = this.getClass().getResourceAsStream("/DreamTeam.GriberStyring/src/main/resources/HTML/impl/installation.html");
+        InputStream is = this.getClass().getResourceAsStream("/HTML/impl/installation.html");
         return is;
     }
 
     @Override
-    public InstallationNodeContribution createInstallationNode(URCapAPI urcapi, DataModel dm) {
-        return new GripperControlInstallationNodeContribution(dm);
+    public InstallationNodeContribution createInstallationNode(URCapAPI urcapi, DataModel model) {
+        return new GripperControlInstallationNodeContribution(model);
     }
 
 }
