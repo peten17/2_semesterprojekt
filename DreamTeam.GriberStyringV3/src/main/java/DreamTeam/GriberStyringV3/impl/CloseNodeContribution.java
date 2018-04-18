@@ -66,12 +66,12 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	/*--------------------------------------------*/
 	
 	private final DataModel model;
-	//private final URCapAPI api;	
+	private final URCapAPI api;	
 	
 	public CloseNodeContribution(DataModel model, URCapAPI api){
 		this.model = model;
 		this.force = "50";
-		//this.api = api;
+		this.api = api;
 	}
 
 	@Override
@@ -102,16 +102,16 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		writer.assign("message","\"" + message + "\"");
 		writer.assign("Title", "\"" + popupTitle + "\"");
 		writer.assign("socketName", "\"" + socketName + "\"");
-		writer.assign("command", "\"" + message + "\"");
-		writer.assign("force", "\"" + force + "\"");
+		writer.assign("command", "\"" + command + ";" + force + "\"");
+//		writer.assign("force", "\"" + force + "\"");
 		writer.appendLine("textmsg(Title, message)");
-		writer.appendLine("textmsg(\"Force: \", force)");
+		writer.appendLine("textmsg(\"Command \", command)");
 		writer.appendLine("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
 		writer.appendLine("socket_close(socketName)");
 		
 		//insert wait on script level
-		//writer.appendLine("sleep(0.5)");
+		writer.appendLine("sleep(0.5)");
 	}
 
 }

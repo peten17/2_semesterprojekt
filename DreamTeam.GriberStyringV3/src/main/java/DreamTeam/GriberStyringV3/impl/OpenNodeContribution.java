@@ -47,10 +47,10 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 		writer.assign("message","\"" + message + "\"");
 		writer.assign("Title", "\"" + popupTitle + "\"");
 		writer.assign("socketName", "\"" + socketName + "\"");
-		writer.assign("command", "\"" + message + "\"");
+		writer.assign("command", "\"" + command + "\"");
 		
 		//log
-		writer.appendLine("textmsg(Title, message)");
+		writer.appendLine("textmsg(Title, command)");
 		
 		//attempt connection + send command to server
 		writer.appendLine("socket_open(IP, port, socketName)");
@@ -58,7 +58,7 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("socket_close(socketName)");
 		
 		//insert wait on script level
-		//writer.appendLine("sleep(0.5)");
+		writer.appendLine("sleep(0.5)");
 		
 	}
 

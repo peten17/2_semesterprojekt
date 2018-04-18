@@ -30,7 +30,7 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	
 	//Node id holder for model
 	private final String NODE_NAME = "NodeType";
-	private final String DEFAULT_NAME = "Socket Gripper V3";
+	private final String DEFAULT_NAME = "Socket Gripper";
 	
 	//IP/port DataModel holders
 	private final String IP_KEY = "IP";
@@ -122,7 +122,6 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		
 		try {
 			addCommand(template, root, nf);
-			root.addChild(nf.createWaitNode());
 		} catch (TreeStructureException e){
 			
 		}

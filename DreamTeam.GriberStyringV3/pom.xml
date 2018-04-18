@@ -22,7 +22,7 @@
 		<urcap.vendor>Kasper Meldgaard</urcap.vendor>
 		<urcap.contactAddress>Legends Lane 1</urcap.contactAddress>
 		<urcap.copyright>Copyright notice (C)</urcap.copyright>
-		<urcap.description>Further development of GriberStyringV3</urcap.description>
+		<urcap.description>Makes is possible to send a string to a listning server (IP/port is set in programming). sends either &quot;Open&quot; or &quot;Close;&lt;force [50,75,100]&gt;&quot;</urcap.description>
 		<urcap.licenseType>License type</urcap.licenseType>
 		<!--********************** END OF URCAP META DATA **********************-->
 		<!--********************************************************************-->
