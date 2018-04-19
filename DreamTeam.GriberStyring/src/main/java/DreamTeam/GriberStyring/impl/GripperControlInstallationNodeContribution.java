@@ -60,7 +60,11 @@ public class GripperControlInstallationNodeContribution implements InstallationN
     }
     
     public void resetIP(){
+<<<<<<< HEAD
+        ipAddress.setText(null);
+=======
         ipAddress.setText(DEFAULT_IP);
+>>>>>>> 5d7886b56f87afd1aa37fc8329345edf9a7350a7
         model.set(IP_KEY, DEFAULT_IP);
     }
     
