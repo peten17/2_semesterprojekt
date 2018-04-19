@@ -52,10 +52,13 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 		//log
 		writer.appendLine("textmsg(Title, command)");
 		
-		//attempt connection + send command to server
-		writer.appendLine("socket_open(IP, port, socketName)");
+		//attempt socket connection
+		writer.ifCondition("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
 		writer.appendLine("socket_close(socketName)");
+		writer.elseCondition();
+		writer.appendLine("popup(error, \"Connection error\", False, True, blocking = True)");
+		writer.end();
 		
 		//insert wait on script level
 		writer.appendLine("sleep(0.5)");

@@ -216,7 +216,11 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public boolean isDefined() {
 		
-		return true;
+		return !(getPortIn() == 0);
+	}
+	
+	private String getErrorMessege(){
+		return "Connecting to IP " + getIPIn() + " failed!";
 	}
 
 	@Override
@@ -229,19 +233,18 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		writer.assign("portString", "\" " + Integer.toString(getPortIn()) + "\"");
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + message + "\"");
+		writer.assign("error", "\"" + getErrorMessege() + "\"");
 //		writer.assign("controllerTemp", "0");
 		
 		//writer.appendLine("controllerTemp = get_controller_temp()");
+		//log
 		writer.appendLine("textmsg(Title, message)");
 		writer.appendLine("textmsg(Title, IP)");
 		writer.appendLine("textmsg(Title, port)");
 //		writer.appendLine("textmsg(Title, controllerTemp)");
 		
+		//allow children access to variables
 		writer.writeChildren();
-//		writer.appendLine("socket_open(IP, port, socketName)");
-//		writer.appendLine("socket_send_string(command, socketName)");
-//		writer.appendLine("socket_close(socketName)");
-		//writer.appendLine("popup(\"" + message + "\", Title, False, False, blocking=True)");
 	}
 	
 }

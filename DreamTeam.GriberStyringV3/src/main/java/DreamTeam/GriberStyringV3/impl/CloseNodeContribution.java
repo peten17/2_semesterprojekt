@@ -104,11 +104,18 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		writer.assign("socketName", "\"" + socketName + "\"");
 		writer.assign("command", "\"" + command + ";" + force + "\"");
 //		writer.assign("force", "\"" + force + "\"");
+		
+		//log
 		writer.appendLine("textmsg(Title, message)");
 		writer.appendLine("textmsg(\"Command \", command)");
-		writer.appendLine("socket_open(IP, port, socketName)");
+		
+		//attempt socket connection
+		writer.ifCondition("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
 		writer.appendLine("socket_close(socketName)");
+		writer.elseCondition();
+		writer.appendLine("popup(error, \"Connection error\", False, True, blocking = True)");
+		writer.end();
 		
 		//insert wait on script level
 		writer.appendLine("sleep(0.5)");
