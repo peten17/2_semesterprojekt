@@ -8,6 +8,7 @@ char string1[1024] = "en-US";
 char string2[1024] = "the answer";
 char string3[1024] = "test";
 UA_Int32 myInteger = 43;
+UA_Variant myVar;
 
 UA_Boolean running = true;
 void stopHandler(int sig)
@@ -39,7 +40,7 @@ void writeVariable(UA_Server *server)
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a different integer value */
 
-    UA_Variant myVar;
+
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
     UA_Server_writeValue(server, myIntegerNodeId, myVar);
