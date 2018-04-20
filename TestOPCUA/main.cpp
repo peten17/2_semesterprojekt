@@ -6,6 +6,8 @@ using namespace std;
 
 char string1[1024] = "en-US";
 char string2[1024] = "the answer";
+UA_Int32 myInteger = 43;
+
 UA_Boolean running = true;
 void stopHandler(int sig)
 {
@@ -16,7 +18,6 @@ void stopHandler(int sig)
 void addVariable(UA_Server *server)
 {
     UA_VariableAttributes attr = UA_VariableAttributes_default;
-    UA_int32 myInteger = 42;
     UA_Variant_setScalar(&attr.value, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
     attr.description = UA_LOCALIZEDTEXT(string1, string2);
     attr.displayName = UA_LOCALIZEDTEXT(string1, string2);
@@ -36,7 +37,7 @@ void writeVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a different integer value */
-    UA_Int32 myInteger = 43;
+
     UA_Variant myVar;
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
