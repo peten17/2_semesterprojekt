@@ -2,6 +2,8 @@
 #include <signal.h>
 #include <open62541.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 using namespace std;
 
