@@ -118,7 +118,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		writer.end();
 		
 		//insert wait on script level
-		writer.appendLine("sleep(0.5)");
+		writer.appendLine("sleep(1)");
 	}
 
 }
