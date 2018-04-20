@@ -6,6 +6,7 @@ using namespace std;
 
 char string1[1024] = "en-US";
 char string2[1024] = "the answer";
+char string3[1024] = "test";
 UA_Int32 myInteger = 43;
 
 UA_Boolean running = true;
@@ -60,7 +61,7 @@ void writeWrongVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a string */
-    UA_String myString = UA_STRING("test");
+    UA_String myString = UA_STRING(string3);
     UA_Variant myVar; UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myString, &UA_TYPES[UA_TYPES_STRING]);
     UA_StatusCode retval = UA_Server_writeValue(server, myIntegerNodeId, myVar);
