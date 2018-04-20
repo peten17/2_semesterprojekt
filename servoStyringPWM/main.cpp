@@ -10,7 +10,7 @@ int main()
     UA_Int16 hest;
     hest = 15;
     cout << hest << endl;
-    int range = 400;
+    int range = 100;
 
     int input = 0, inputMenu = 0;
     double buf;
@@ -19,7 +19,7 @@ int main()
     pinMode(18, PWM_OUTPUT);
     pwmSetMode (PWM_MODE_MS);
     pwmSetRange (range);
-    pwmSetClock (1);
+    pwmSetClock (24);
 
     if(wiringPiSetup() == -1)
     {
