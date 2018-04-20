@@ -12,5 +12,4 @@ INCLUDEPATH += C:\Users\vikpo\Desktop\Libaries\open62541-win64\build
 HEADERS += \
     server.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
