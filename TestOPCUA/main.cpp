@@ -1,6 +1,7 @@
 #include <iostream>
 #include <signal.h>
 #include <open62541.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -39,7 +40,6 @@ void writeVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a different integer value */
-
 
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
