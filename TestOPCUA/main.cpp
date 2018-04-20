@@ -4,6 +4,8 @@
 
 using namespace std;
 
+char string1[1024] = "en-US";
+char string2[1024] = "the answer";
 UA_Boolean running = true;
 void stopHandler(int sig)
 {
@@ -16,13 +18,13 @@ void addVariable(UA_Server *server)
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_int32 myInteger = 42;
     UA_Variant_setScalar(&attr.value, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
-    attr.description = UA_LOCALIZEDTEXT('en-US', 'the answer');
-    attr.displayName = UA_LOCALIZEDTEXT('en-US', 'the answer');
+    attr.description = UA_LOCALIZEDTEXT(string1, string2);
+    attr.displayName = UA_LOCALIZEDTEXT(string1, string2);
     attr.dataType = UA_TYPES[UA_TYPES_INT32].typeId;
     attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
 
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
-    UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(1, "the answer");
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
+    UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(1, string2);
     UA_NodeId parentNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER);
     UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
@@ -32,7 +34,7 @@ void addVariable(UA_Server *server)
 
 void writeVariable(UA_Server *server)
 {
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a different integer value */
     UA_Int32 myInteger = 43;
     UA_Variant myVar;
@@ -55,7 +57,7 @@ void writeVariable(UA_Server *server)
 
 void writeWrongVariable(UA_Server *server)
 {
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a string */
     UA_String myString = UA_STRING("test");
     UA_Variant myVar; UA_Variant_init(&myVar);
