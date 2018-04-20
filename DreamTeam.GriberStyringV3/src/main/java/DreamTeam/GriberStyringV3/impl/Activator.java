@@ -13,7 +13,7 @@ import com.ur.urcap.api.contribution.ProgramNodeService;
 public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		bundleContext.registerService(ProgramNodeService.class, new DreamTeam.GriberStyringV3.impl.ProgramNodeService(), null);
+		bundleContext.registerService(ProgramNodeService.class, new GriberProgramNodeService(), null);
 		bundleContext.registerService(ProgramNodeService.class, new OpenNodeService(), null);
 		bundleContext.registerService(ProgramNodeService.class, new CloseNodeService(), null);
 	}
