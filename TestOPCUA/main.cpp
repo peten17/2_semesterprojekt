@@ -8,8 +8,6 @@ using namespace std;
 char string1[1024] = "en-US";
 char string2[1024] = "the answer";
 char string3[1024] = "test";
-UA_Int32 myInteger = 43;
-UA_Variant myVar;
 
 UA_Boolean running = true;
 void stopHandler(int sig)
@@ -21,7 +19,9 @@ void stopHandler(int sig)
 void addVariable(UA_Server *server)
 {
     UA_VariableAttributes attr = UA_VariableAttributes_default;
+    UA_Int32 myInteger = 43;
     UA_Variant_setScalar(&attr.value, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
+
     attr.description = UA_LOCALIZEDTEXT(string1, string2);
     attr.displayName = UA_LOCALIZEDTEXT(string1, string2);
     attr.dataType = UA_TYPES[UA_TYPES_INT32].typeId;
@@ -40,7 +40,8 @@ void writeVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a different integer value */
-
+    UA_Int32 myInteger = 43;
+    UA_Variant myVar;
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
     UA_Server_writeValue(server, myIntegerNodeId, myVar);
@@ -60,13 +61,14 @@ void writeVariable(UA_Server *server)
 
 void writeWrongVariable(UA_Server *server)
 {
+    UA_Variant myVar;
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a string */
     UA_String myString = UA_STRING(string3);
     UA_Variant myVar; UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myString, &UA_TYPES[UA_TYPES_STRING]);
     UA_StatusCode retval = UA_Server_writeValue(server, myIntegerNodeId, myVar);
-    cout << ("Writing a string returned statuscode %s\n", UA_StatusCode_name(retval));
+    cout << ("Writing a string returned statuscode \n", UA_StatusCode_name(retval));
 }
 
 int main()
