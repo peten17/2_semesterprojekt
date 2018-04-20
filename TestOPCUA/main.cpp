@@ -8,7 +8,7 @@
 using namespace std;
 
 char string1[1024] = "en-US";
-char string2[1024] = "Din far er din mor";
+char string2[1024] = "Din far";
 char string3[1024] = "test";
 UA_Int32 myInteger = 43;
 UA_Variant myVar;
