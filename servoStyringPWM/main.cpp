@@ -79,29 +79,28 @@ int main()
             Server c;
             bool t;
             c.serverBind();
-            string inputPoly(c.serverListen());
             while(t = true)
             {
+                string inputPoly(c.serverListen());
+                cout << "Currently lisetning..." << endl;
                 if(inputPoly == "Open")
                 {
+                    cout << "Received open node" << endl;
                     pwmWrite(18, 200);
-                    delay(2000);
-                    pwmWrite(18, 150);
                     inputPoly = "";
                 }
                 else if(inputPoly == "Close")
                 {
+                    cout << "Reveiced close node" << endl;
                     pwmWrite(18, 100);
-                    delay(2000);
-                    pwmWrite(18, 150);
                     inputPoly = "";
-                }
+                }/*
                 else if(inputPoly == "Stop")
                 {
                     cout << "The program has finished." << endl;
                     pwmWrite(18, 150);
                     t = false;
-                }
+                }*/
                 else
                 {
                     t = false;
