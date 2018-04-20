@@ -10,6 +10,7 @@ int main()
     UA_Int16 hest;
     hest = 15;
     cout << hest << endl;
+    int range = 400;
 
     int input = 0, inputMenu = 0;
     double buf;
@@ -17,8 +18,8 @@ int main()
     wiringPiSetupGpio();
     pinMode(18, PWM_OUTPUT);
     pwmSetMode (PWM_MODE_MS);
-    pwmSetRange (0.125);
-    pwmSetClock (1920);
+    pwmSetRange (range);
+    pwmSetClock (1);
 
     if(wiringPiSetup() == -1)
     {
@@ -50,7 +51,7 @@ int main()
                 {
                     cout << "Invalid input. Duty cycle set to maximum.";
                     cout << "Current duty cycle: " << "100" << "%" << endl;
-                    pwmWrite(18, 2000);
+                    pwmWrite(18, range);
 
                 }
                 else if(input < 0)
@@ -67,7 +68,7 @@ int main()
                 else
                 {
                     pwmWrite(18, input);
-                    cout << "Current duty cycle: " << (buf/2000)*100 << "%" << endl;
+                    cout << "Current duty cycle: " << (buf/range)*100 << "%" << endl;
                     delay(2000);
                 }
 
