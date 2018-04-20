@@ -1,6 +1,7 @@
 #include <iostream>
-#include "open62541.h"
 #include <signal.h>
+#include <open62541.h>
+
 using namespace std;
 
 UA_Boolean running = true;
