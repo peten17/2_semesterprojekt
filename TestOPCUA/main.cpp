@@ -61,11 +61,11 @@ void writeVariable(UA_Server *server)
 
 void writeWrongVariable(UA_Server *server)
 {
-    UA_Variant myVar;
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, string2);
     /* Write a string */
     UA_String myString = UA_STRING(string3);
-    UA_Variant myVar; UA_Variant_init(&myVar);
+    UA_Variant myVar;
+    UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myString, &UA_TYPES[UA_TYPES_STRING]);
     UA_StatusCode retval = UA_Server_writeValue(server, myIntegerNodeId, myVar);
     cout << ("Writing a string returned statuscode \n", UA_StatusCode_name(retval));
