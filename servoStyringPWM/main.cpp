@@ -17,8 +17,8 @@ int main()
     wiringPiSetupGpio();
     pinMode(18, PWM_OUTPUT);
     pwmSetMode (PWM_MODE_MS);
-    pwmSetRange (2000);
-    pwmSetClock (192);
+    pwmSetRange (0.125);
+    pwmSetClock (1920);
 
     if(wiringPiSetup() == -1)
     {
