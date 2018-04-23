@@ -9,6 +9,11 @@ char descrip3[1024] = "Pump type";
 char descrip4[1024] = "Status";
 char descrip5[1024] = "MotorRPM";
 char descrip6[1024] = "MotorRPMS";
+char descrip7[1024] = "Pump (Manual)";
+char descrip8[1024] = "Pump King Ltd";
+char descrip9[1024] = "ManufacturerName";
+char descrip10[1024] = "Mega pump 3000";
+char descrip11[1024] = "ModelName";
 
 
 char local[1024] = "en-US";
@@ -22,39 +27,39 @@ static void manuallyDefinePump(UA_Server *server)
     UA_NodeId pumpId;
     /* get the nodeid assigned by the server */
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
-    oAttr.displayName = UA_LOCALIZEDTEXT("en-US", "Pump (Manual)");
+    oAttr.displayName = UA_LOCALIZEDTEXT(local, descrip7);
     UA_Server_addObjectNode(server, UA_NODEID_NULL, UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
-                            UA_QUALIFIEDNAME(1, "Pump (Manual)"),
+                            UA_QUALIFIEDNAME(1, descrip7),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE), oAttr, NULL, &pumpId);
     UA_VariableAttributes mnAttr = UA_VariableAttributes_default;
-    UA_String manufacturerName = UA_STRING("Pump King Ltd.");
+    UA_String manufacturerName = UA_STRING(descrip8);
     UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
-    mnAttr.displayName = UA_LOCALIZEDTEXT("en-US", "ManufacturerName");
+    mnAttr.displayName = UA_LOCALIZEDTEXT(local, descrip9);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, pumpId, UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, "ManufacturerName"), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              UA_QUALIFIEDNAME(1, descrip9), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               mnAttr, NULL, NULL);
     UA_VariableAttributes modelAttr = UA_VariableAttributes_default;
-    UA_String modelName = UA_STRING("Mega Pump 3000");
+    UA_String modelName = UA_STRING(descrip10);
     UA_Variant_setScalar(&modelAttr.value, &modelName, &UA_TYPES[UA_TYPES_STRING]);
-    modelAttr.displayName = UA_LOCALIZEDTEXT("en-US", "ModelName");
+    modelAttr.displayName = UA_LOCALIZEDTEXT(local, descrip11);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, pumpId, UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, "ModelName"), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              UA_QUALIFIEDNAME(1, descrip11), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               modelAttr, NULL, NULL);
     UA_VariableAttributes statusAttr = UA_VariableAttributes_default;
     UA_Boolean status = true;
     UA_Variant_setScalar(&statusAttr.value, &status, &UA_TYPES[UA_TYPES_BOOLEAN]);
-    statusAttr.displayName = UA_LOCALIZEDTEXT("en-US", "Status");
+    statusAttr.displayName = UA_LOCALIZEDTEXT(local, descrip4);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, pumpId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, "Status"), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              UA_QUALIFIEDNAME(1, descrip4), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               statusAttr, NULL, NULL);
     UA_VariableAttributes rpmAttr = UA_VariableAttributes_default;
     UA_Double rpm = 50.0; UA_Variant_setScalar(&rpmAttr.value, &rpm, &UA_TYPES[UA_TYPES_DOUBLE]);
-    rpmAttr.displayName = UA_LOCALIZEDTEXT("en-US", "MotorRPM");
+    rpmAttr.displayName = UA_LOCALIZEDTEXT(local, descrip5);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, pumpId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, "MotorRPMs"),
+                              UA_QUALIFIEDNAME(1, descrip6),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), rpmAttr, NULL, NULL);
 }
 
