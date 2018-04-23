@@ -5,7 +5,7 @@ opcUAVariable::opcUAVariable()
 
 }
 
-opcUAVariable::opcUAVariable(char varName[1024], char vers[1024], int index)
+opcUAVariable::opcUAVariable(char* varName, char* vers, int index)
 {
     variableName = varName;
     version = vers;

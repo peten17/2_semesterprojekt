@@ -10,7 +10,7 @@ class opcUAVariable
 {
 public:
     opcUAVariable();
-    opcUAVariable(char varName[1024], char vers[1024], int index);
+    opcUAVariable(char *varName, char *vers, int index);
 
     void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
     void writeVariable(UA_Server *server, UA_Int32 uaInt);
