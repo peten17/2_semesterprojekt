@@ -62,5 +62,5 @@ void opcUAVariable::writeWrongVariable(UA_Server *server, int index)
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &myString, &UA_TYPES[UA_TYPES_STRING]);
     UA_StatusCode retval = UA_Server_writeValue(server, myIntegerNodeId, myVar);
-    cout << ("Writing a string returned statuscode \n", UA_StatusCode_name(retval));
+    std::cout << ("Writing a string returned statuscode \n", UA_StatusCode_name(retval));
 }
