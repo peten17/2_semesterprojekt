@@ -28,7 +28,7 @@ void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
     UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(nsIndex, variableName);
     UA_NodeId parentNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_OBJECTSFOLDER);
     UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_ORGANIZES);
-    UA_NodeId *nextId = UA_NODEID_STRING((nsIndex + 1), variableName);
+    UA_NodeId nextId = *UA_NODEID_STRING((nsIndex + 1), variableName);
 
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
                               myIntegerName, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
