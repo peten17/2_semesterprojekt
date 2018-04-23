@@ -25,7 +25,7 @@ int main()
     UA_Server *server = UA_Server_new(config);
 
     opcUAVariable uaIntGrips(descrip, vers, 1);
-    opcUAVariable uaIntGrips1(descrip1, vers1, 2);
+    opcUAVariable uaIntGrips1(descrip1, vers1, 3);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
     uaIntGrips.writeWrongVariable(server);
