@@ -131,7 +131,7 @@ void defineObjectTypes(UA_Server *server)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               rpmAttr, NULL, NULL);
 }
-
+/*
 static void addPumpObjectInstance(UA_Server *server, char *name)
 {
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
@@ -139,17 +139,16 @@ static void addPumpObjectInstance(UA_Server *server, char *name)
     UA_Server_addObjectNode(server, UA_NODEID_NULL, UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), UA_QUALIFIEDNAME(1, name),
                             pumpTypeId,
-                            /* this refers to the object type identifier */ oAttr, NULL, NULL);
+                            /* this refers to the object type identifier */ /*oAttr, NULL, NULL);
 }
-
+*/
 char pump251[1024] = "New pump created";
+/*
 static UA_StatusCode pumpTypeConstructor(UA_Server *server, const UA_NodeId *sessionId,
                                          void *sessionContext, const UA_NodeId *typeId,
                                          void *typeContext, const UA_NodeId *nodeId, void **nodeContext)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, pump251);
-
-    /* Find the NodeId of the status child variable */
     UA_RelativePathElement rpe;
     UA_RelativePathElement_init(&rpe);
     rpe.referenceTypeId = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
@@ -166,15 +165,14 @@ static UA_StatusCode pumpTypeConstructor(UA_Server *server, const UA_NodeId *ses
     UA_BrowsePathResult bpr = UA_Server_translateBrowsePathToNodeIds(server, &bp);
     if(bpr.statusCode != UA_STATUSCODE_GOOD || bpr.targetsSize < 1) return bpr.statusCode;
 
-    /* Set the status value */
+
     UA_Boolean status = true; UA_Variant value;
     UA_Variant_setScalar(&value, &status, &UA_TYPES[UA_TYPES_BOOLEAN]);
     UA_Server_writeValue(server, bpr.targets[0].targetId.nodeId, value);
     UA_BrowsePathResult_deleteMembers(&bpr);
 
-    /* At this point we could replace the node context .. */
     return UA_STATUSCODE_GOOD;
-}
+}*/
 static void addPumpTypeConstructor(UA_Server *server)
 {
     UA_NodeTypeLifecycle lifecycle;
