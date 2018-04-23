@@ -19,6 +19,7 @@ char amountOfGrips2[1024] = "Grips";
 char deviceNameString[1024] = "UR5 (Universal Robot 5)";
 char manufactorerNameString[1024] = "Dream Team";
 char manufactorerNameChar[1024] = "DreamTeam";
+char local[1024] = "en-US";
 char descrip10[1024] = "Mega pump 3000";
 char descrip11[1024] = "ModelName";
 
