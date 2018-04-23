@@ -25,15 +25,15 @@ int main()
     UA_Server *server = UA_Server_new(config);
 
     opcUAVariable uaIntGrips(descrip, vers, 1);
-   // opcUAVariable uaIntGrips1(descrip1, vers1, 2);
+    opcUAVariable uaIntGrips1(descrip1, vers1, 2);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
     uaIntGrips.writeWrongVariable(server);
-/*
+
     uaIntGrips1.addVariable32Int(server, 50);
     uaIntGrips1.writeVariable(server, 50);
     uaIntGrips1.writeWrongVariable(server);
-*/
+
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
