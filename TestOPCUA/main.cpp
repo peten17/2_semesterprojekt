@@ -3,7 +3,7 @@
 
 using namespace std;
 
-char descrip[1024] = "Test variable";
+char descrip[1024] = "Test variable42";
 char vers[1024] = "test";
 char descrip1[1024] = "Variable Test";
 char vers1[1024] = "1test";

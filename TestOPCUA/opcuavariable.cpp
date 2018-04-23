@@ -13,7 +13,7 @@ opcUAVariable::opcUAVariable(char* varName, char* vers, int index)
 
 }
 
-static void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
+void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
 {
     UA_VariableAttributes attr = UA_VariableAttributes_default;
 
@@ -34,7 +34,7 @@ static void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
                               attr, NULL, NULL);
 }
 
-static void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
+void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
     /* Write a different integer value */
@@ -56,7 +56,7 @@ static void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
     UA_Server_write(server, &wv);
 }
 
-static void opcUAVariable::writeWrongVariable(UA_Server *server)
+void opcUAVariable::writeWrongVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
     /* Write a string */

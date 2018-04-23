@@ -12,14 +12,14 @@ public:
     opcUAVariable();
     opcUAVariable(char *varName, char *vers, int index);
 
-    static void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
-    static void writeVariable(UA_Server *server, UA_Int32 uaInt);
-    static void writeWrongVariable(UA_Server *server);
+    void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
+    void writeVariable(UA_Server *server, UA_Int32 uaInt);
+    void writeWrongVariable(UA_Server *server);
 
 private:
-    static char local[1024] = "en-US", *variableName, *version;
-    static UA_Variant myVar;
-    static int nsIndex;
+    char local[1024] = "en-US", *variableName, *version;
+    UA_Variant myVar;
+    int nsIndex;
 };
 
 #endif // OPCUAVARIABLE_H
