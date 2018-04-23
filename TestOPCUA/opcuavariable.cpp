@@ -31,28 +31,7 @@ void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
 
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
                               myIntegerName, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
-                              attr, NULL, NULL);
-}
-
-void opcUAVariable::addVariable64Int(UA_Server *server, UA_Int32 uaInt)
-{
-    UA_VariableAttributes attr = UA_VariableAttributes_default;
-
-    UA_Variant_setScalar(&attr.value, &uaInt, &UA_TYPES[UA_TYPES_INT32]);
-
-    attr.description = UA_LOCALIZEDTEXT(local, variableName);
-    attr.displayName = UA_LOCALIZEDTEXT(local, variableName);
-    attr.dataType = UA_TYPES[UA_TYPES_INT32].typeId;
-    attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-
-    UA_NodeId myIntegerNodeId1 = UA_NODEID_STRING(nsIndex, variableName);
-    UA_QualifiedName myIntegerName1 = UA_QUALIFIEDNAME(nsIndex, variableName);
-    UA_NodeId parentNodeId1 = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_OBJECTSFOLDER);
-    UA_NodeId parentReferenceNodeId1 = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_ORGANIZES);
-
-    UA_Server_addVariableNode(server, myIntegerNodeId1, parentNodeId1, parentReferenceNodeId1,
-                              myIntegerName1, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
-                              attr, NULL, NULL);
+                              attr, NULL, (nsIndex + 1));
 }
 
 void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
