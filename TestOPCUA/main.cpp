@@ -2,6 +2,13 @@
 
 using namespace std;
 
+UA_Boolean running = true;
+void stopHandler(int sig)
+{
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
+    running = false;
+}
+
 char descrip[1024] = "Device type";
 char descrip1[1024] = "Manufacturer name";
 char descrip2[1024] = "Model name";
@@ -63,17 +70,8 @@ static void manuallyDefinePump(UA_Server *server)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), rpmAttr, NULL, NULL);
 }
 
-
-
-UA_Boolean running = true;
-void stopHandler(int sig)
-{
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
-    running = false;
-}
-
 UA_NodeId pumpTypeId = {1, UA_NODEIDTYPE_NUMERIC, {1001}};
-
+/*
 void defineObjectTypes(UA_Server *server)
 {
     UA_NodeId deviceTypeId;
@@ -92,7 +90,7 @@ void defineObjectTypes(UA_Server *server)
                               UA_QUALIFIEDNAME(1, descrip1),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               mnAttr, NULL, &manufacturerNameId);
-    /* Make the manufacturer name mandatory */
+    /* Make the manufacturer name mandatory
     UA_Server_addReference(server, manufacturerNameId,
                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASMODELLINGRULE),
                            UA_EXPANDEDNODEID_NUMERIC(0, UA_NS0ID_MODELLINGRULE_MANDATORY), true);
@@ -103,7 +101,7 @@ void defineObjectTypes(UA_Server *server)
                               UA_QUALIFIEDNAME(1, descrip2),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               modelAttr, NULL, NULL);
-    /* Define the object type for "Pump" */
+    /* Define the object type for "Pump"
     UA_ObjectTypeAttributes ptAttr = UA_ObjectTypeAttributes_default; ptAttr.displayName = UA_LOCALIZEDTEXT(local, descrip3);
     UA_Server_addObjectTypeNode(server, pumpTypeId, deviceTypeId,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),
@@ -117,7 +115,7 @@ void defineObjectTypes(UA_Server *server)
                               UA_QUALIFIEDNAME(1, descrip4),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               statusAttr, NULL, &statusId);
-    /* Make the status variable mandatory */
+    /* Make the status variable mandatory
     UA_Server_addReference(server, statusId,
                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASMODELLINGRULE),
                            UA_EXPANDEDNODEID_NUMERIC(0, UA_NS0ID_MODELLINGRULE_MANDATORY), true);
@@ -130,7 +128,7 @@ void defineObjectTypes(UA_Server *server)
                               UA_QUALIFIEDNAME(1, descrip6),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               rpmAttr, NULL, NULL);
-}
+}*/
 /*
 static void addPumpObjectInstance(UA_Server *server, char *name)
 {
@@ -142,7 +140,7 @@ static void addPumpObjectInstance(UA_Server *server, char *name)
                             /* this refers to the object type identifier */ /*oAttr, NULL, NULL);
 }
 */
-char pump251[1024] = "New pump created";
+
 /*
 static UA_StatusCode pumpTypeConstructor(UA_Server *server, const UA_NodeId *sessionId,
                                          void *sessionContext, const UA_NodeId *typeId,
