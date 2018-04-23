@@ -4,9 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    open62541.c
+    open62541.c \
+    opcuavariable.cpp
 
 INCLUDEPATH += C:\Users\vikpo\Desktop\Libaries\open62541-win64\build
 
 HEADERS += \
-    open62541.h
+    open62541.h \
+    opcuavariable.h
