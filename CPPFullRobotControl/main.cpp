@@ -132,8 +132,8 @@ int main()
 
             openCloseBool = false;
             gripsAmount++;
-            int pos = inputPoly.find(';');
-            force = atoi(inputPoly.substr(pos, 2));
+            /*int pos = inputPoly.find(';');
+            force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 0;
 
             inputPoly = "";
