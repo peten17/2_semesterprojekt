@@ -10,17 +10,15 @@ class opcUAVariable
 {
 public:
     opcUAVariable();
-    opcUAVariable(char *varName, char *vers, int index);
+    opcUAVariable(char *varName, char *vers);
 
     void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
-    void addVariable64Int(UA_Server *server, UA_Int32 uaInt);
     void writeVariable(UA_Server *server, UA_Int32 uaInt);
     void writeWrongVariable(UA_Server *server);
 
 private:
     char local[1024] = "en-US", *variableName, *version;
     UA_Variant myVar;
-    int nsIndex;
     static UA_NodeId pointTypeId;
 };
 

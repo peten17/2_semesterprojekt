@@ -5,12 +5,10 @@ opcUAVariable::opcUAVariable()
 
 }
 
-opcUAVariable::opcUAVariable(char* varName, char* vers, int index)
+opcUAVariable::opcUAVariable(char* varName, char* vers)
 {
     variableName = varName;
     version = vers;
-    nsIndex = index;
-
 }
 
 void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
@@ -24,19 +22,19 @@ void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
     attr.dataType = UA_TYPES[UA_TYPES_INT32].typeId;
     attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
 
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
-    UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(nsIndex, variableName);
-    UA_NodeId parentNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_OBJECTSFOLDER);
-    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_ORGANIZES);
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
+    UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(1, variableName);
+    UA_NodeId parentNodeId = UA_NODEID_NUMERIC((0), UA_NS0ID_OBJECTSFOLDER);
+    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC((0), UA_NS0ID_ORGANIZES);
 
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
-                              myIntegerName, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
+                              myIntegerName, UA_NODEID_NUMERIC((0), UA_NS0ID_BASEDATAVARIABLETYPE),
                               attr, NULL, NULL);
 }
 
 void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
 {
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
     /* Write a different integer value */
     UA_Variant_init(&myVar);
     UA_Variant_setScalar(&myVar, &uaInt, &UA_TYPES[UA_TYPES_INT32]);
@@ -45,7 +43,7 @@ void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
     UA_WriteValue wv;
     UA_WriteValue_init(&wv);
     wv.nodeId = myIntegerNodeId;
-    wv.attributeId = /*UA_ATTRIBUTEID_VALUE*/ nsIndex;
+    wv.attributeId = UA_ATTRIBUTEID_VALUE;
     wv.value.status = UA_STATUSCODE_BADNOTCONNECTED;
     wv.value.hasStatus = true;
     UA_Server_write(server, &wv);
@@ -58,7 +56,7 @@ void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
 
 void opcUAVariable::writeWrongVariable(UA_Server *server)
 {
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
     /* Write a string */
     UA_String myString = UA_STRING(version);
     UA_Variant_init(&myVar);
