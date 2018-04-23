@@ -6,6 +6,10 @@ char descrip[1024] = "Test variable42";
 char vers[1024] = "test";
 char descrip1[1024] = "Variable Test";
 char vers1[1024] = "1test";
+char pump5[1024] = "pump1";
+char pump2[1024] = "pump2";
+char pump3[1024] = "pump3";
+char pump4[1024] = "pump4";
 
 UA_Boolean running = true;
 void stopHandler(int sig)
@@ -145,11 +149,11 @@ int main(void)
 */
     manuallyDefinePump(server);
     defineObjectTypes(server);
-    addPumpObjectInstance(server, "pump2");
-    addPumpObjectInstance(server, "pump3");
+    addPumpObjectInstance(server, pump2);
+    addPumpObjectInstance(server, pump3);
     addPumpTypeConstructor(server);
-    addPumpObjectInstance(server, "pump4");
-    addPumpObjectInstance(server, "pump5");
+    addPumpObjectInstance(server, pump4);
+    addPumpObjectInstance(server, pump5);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
