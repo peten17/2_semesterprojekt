@@ -96,18 +96,21 @@ int main()
     bool t = true;
     c.serverBind();
 
+    cout << "Server binded" << endl;
+
     signal(2, stopHandler);
     signal(2, stopHandler);
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
 
+    cout << "Opc UA server configed" << endl;
+
     defineOPCUAServer(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
-    UA_Server_delete(server);
-    UA_ServerConfig_delete(config);
 
+    cout << "Opc UA server running" << endl;
     while(t == true)
     {
         string inputPoly(c.serverListen());
@@ -132,12 +135,16 @@ int main()
 
             openCloseBool = false;
             gripsAmount++;
-            /*int pos = inputPoly.find(';');
+            /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 0;
 
             inputPoly = "";
         }
     }
+
+    UA_Server_delete(server);
+    UA_ServerConfig_delete(config);
+
     return retval;
 }
