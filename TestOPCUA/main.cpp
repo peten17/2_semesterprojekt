@@ -199,7 +199,7 @@ int main(void)
     uaIntGrips1.writeWrongVariable(server);
 */
     manuallyDefinePump(server);
-    defineObjectTypes(server);
+    //defineObjectTypes(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
