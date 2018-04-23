@@ -71,11 +71,18 @@ int main(void)
     //defineOPCUAServer(server);
     char name[1024] = "Var1";
     char vers[1024] = "Var1-Vers";
+    char name1[1024] = "Var12";
+    char vers1[1024] = "Var12-Vers";
 
     opcUAVariable var(name, vers, 1);
     var.addVariable32Int(server, 40);
     var.writeVariable(server, 40);
     var.writeWrongVariable(server);
+
+    opcUAVariable var1(name1, vers1, 1);
+    var1.addVariable32Int(server, 44);
+    var1.writeVariable(server, 44);
+    var1.writeWrongVariable(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
