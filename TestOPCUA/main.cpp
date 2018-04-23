@@ -3,9 +3,8 @@
 
 using namespace std;
 
-char string1[1024] = "en-US";
-char string2[1024] = "Test variable";
-char string3[1024] = "test";
+char descrip[1024] = "Test variable";
+char vers[1024] = "test";
 UA_Int32 myInteger = 43;
 UA_Boolean myInteger2 = true;
 UA_Variant myVar;
@@ -26,7 +25,7 @@ int main()
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
 
-    opcUAVariable uaIntGrips("Number of grips", "test", 1);
+    opcUAVariable uaIntGrips(descrip, vers, 1);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
     uaIntGrips.writeWrongVariable(server);
