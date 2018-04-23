@@ -31,7 +31,7 @@ void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
 
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
                               myIntegerName, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
-                              attr, NULL, &pointTypeId);
+                              attr, NULL, NULL);
 }
 
 void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
