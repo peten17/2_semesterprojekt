@@ -7,11 +7,7 @@ using namespace std;
 
 int main()
 {
-    UA_Int16 hest;
-    hest = 15;
-    cout << hest << endl;
     int range = 100;
-
     int input = 0, inputMenu = 0;
     double buf;
 
