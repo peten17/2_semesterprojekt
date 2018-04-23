@@ -29,7 +29,7 @@ int main()
     uaIntGrips.writeVariable(server, 42);
     uaIntGrips.writeWrongVariable(server);
 
-    uaIntGrips1.addVariable32Int(server, 50);
+    uaIntGrips1.addVariable64Int(server, 50);
     uaIntGrips1.writeVariable(server, 50);
     uaIntGrips1.writeWrongVariable(server);
 
