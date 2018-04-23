@@ -21,6 +21,7 @@ private:
     char local[1024] = "en-US", *variableName, *version;
     UA_Variant myVar;
     int nsIndex;
+    static UA_NodeId pointTypeId;
 };
 
 #endif // OPCUAVARIABLE_H
