@@ -28,6 +28,7 @@ void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
     UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(nsIndex, variableName);
     UA_NodeId parentNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_OBJECTSFOLDER);
     UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_ORGANIZES);
+
     UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
                               myIntegerName, UA_NODEID_NUMERIC((nsIndex - 1), UA_NS0ID_BASEDATAVARIABLETYPE),
                               attr, NULL, NULL);
@@ -54,7 +55,7 @@ void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
     UA_Server_write(server, &wv);
 }
 
-void opcUAVariable::writeWrongVariable(UA_Server *server, int index)
+void opcUAVariable::writeWrongVariable(UA_Server *server)
 {
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(nsIndex, variableName);
     /* Write a string */

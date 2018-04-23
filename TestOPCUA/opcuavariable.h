@@ -14,7 +14,7 @@ public:
 
     void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
     void writeVariable(UA_Server *server, UA_Int32 uaInt);
-    void writeWrongVariable(UA_Server *server, int index);
+    void writeWrongVariable(UA_Server *server);
 
 private:
     char local[1024] = "en-US", *variableName, *version;

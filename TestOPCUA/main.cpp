@@ -7,9 +7,6 @@ char descrip[1024] = "Test variable";
 char vers[1024] = "test";
 char descrip1[1024] = "Test variable1";
 char vers1[1024] = "test1";
-UA_Int32 myInteger = 43;
-UA_Boolean myInteger2 = true;
-UA_Variant myVar;
 
 UA_Boolean running = true;
 void stopHandler(int sig)
@@ -31,10 +28,11 @@ int main()
     opcUAVariable uaIntGrips1(descrip1, vers1, 3);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
-    uaIntGrips.writeWrongVariable(server, 1);
+    uaIntGrips.writeWrongVariable(server);
+
     uaIntGrips1.addVariable32Int(server, 50);
     uaIntGrips1.writeVariable(server, 50);
-    uaIntGrips1.writeWrongVariable(server, 3);
+    uaIntGrips1.writeWrongVariable(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
