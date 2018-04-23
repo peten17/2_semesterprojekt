@@ -1,6 +1,5 @@
 #include <opcuavariable.h>
 
-
 using namespace std;
 
 char descrip[1024] = "Test variable42";

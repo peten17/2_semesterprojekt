@@ -13,6 +13,7 @@ public:
     opcUAVariable(char *varName, char *vers, int index);
 
     void addVariable32Int(UA_Server *server, UA_Int32 uaInt);
+    void addVariable64Int(UA_Server *server, UA_Int32 uaInt);
     void writeVariable(UA_Server *server, UA_Int32 uaInt);
     void writeWrongVariable(UA_Server *server);
 
