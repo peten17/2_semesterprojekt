@@ -28,7 +28,7 @@ int main()
     opcUAVariable uaIntGrips(descrip, vers, 1);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
-    uaIntGrips.writeWrongVariable(server);
+    uaIntGrips.writeWrongVariable(server, 1);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
