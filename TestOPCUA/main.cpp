@@ -172,14 +172,14 @@ static UA_StatusCode pumpTypeConstructor(UA_Server *server, const UA_NodeId *ses
     UA_BrowsePathResult_deleteMembers(&bpr);
 
     return UA_STATUSCODE_GOOD;
-}*/
+}
 static void addPumpTypeConstructor(UA_Server *server)
 {
     UA_NodeTypeLifecycle lifecycle;
     lifecycle.constructor = pumpTypeConstructor;
     lifecycle.destructor = NULL;
     UA_Server_setNodeTypeLifecycle(server, pumpTypeId, lifecycle);
-}
+}*/
 
 int main(void)
 {
