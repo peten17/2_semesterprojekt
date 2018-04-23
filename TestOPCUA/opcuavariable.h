@@ -17,7 +17,7 @@ public:
     void writeWrongVariable(UA_Server *server);
 
 private:
-    char local[1024] = "en-US", variableName[1024], version[1024];
+    char local[1024] = "en-US", *variableName, *version;
     UA_Variant myVar;
     int nsIndex;
 };
