@@ -10,12 +10,15 @@ void stopHandler(int sig)
 }
 
 char openClose[1024] = "Open";
-char amountOfGrips[1024] = "Amount Of Grips";
-char amountOfGrips2[1024] = "Grips";
+char aog[1024] = "Amount Of Grips";
+char aogBrowse[1024] = "Grips";
 char deviceNameString[1024] = "UR5 (Universal Robot 5)";
 char manufactorerNameString[1024] = "Dream Team";
-char manufactorerNameChar[1024] = "DreamTeam";
+char manufactorerNameChar[1024] = "Manufactorer Name";
 char local[1024] = "en-US";
+
+UA_Boolean openCloseBool = true;
+UA_Double gripsAmount = 0;
 
 static void defineOPCUAServer(UA_Server *server)
 {
@@ -30,17 +33,16 @@ static void defineOPCUAServer(UA_Server *server)
                             UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE), oAttr, NULL, &robotId);
 
     UA_VariableAttributes mnAttr = UA_VariableAttributes_default;
-    UA_String manufacturerName = UA_STRING(manufactorerNameString);
+    UA_String manufacturerName = UA_STRING(manufactorerNameChar);
     UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
     mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameString);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, manufactorerNameChar),
+                              UA_QUALIFIEDNAME(1, manufactorerNameString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               mnAttr, NULL, NULL);
 
     UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
-    UA_Boolean openCloseBool = true;
     UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
     openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
@@ -50,12 +52,11 @@ static void defineOPCUAServer(UA_Server *server)
                               openCloseAttr, NULL, NULL);
 
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
-    UA_Double gripsAmount = 0;
     UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
-    gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, amountOfGrips);
+    gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, amountOfGrips2),
+                              UA_QUALIFIEDNAME(1, aogBrowse),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), gripsAAttr, NULL, NULL);
 }
 
