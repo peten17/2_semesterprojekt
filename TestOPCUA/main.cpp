@@ -87,26 +87,27 @@ void defineObjectTypes(UA_Server *server)
 static void addPumpObjectInstance(UA_Server *server, char *name)
 {
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
-    oAttr.displayName = UA_LOCALIZEDTEXT("en-US", name);
+    oAttr.displayName = UA_LOCALIZEDTEXT(local, name);
     UA_Server_addObjectNode(server, UA_NODEID_NULL, UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), UA_QUALIFIEDNAME(1, name),
                             pumpTypeId,
                             /* this refers to the object type identifier */ oAttr, NULL, NULL);
 }
 
-
+char pump251[1024] = "New pump created";
 static UA_StatusCode pumpTypeConstructor(UA_Server *server, const UA_NodeId *sessionId,
                                          void *sessionContext, const UA_NodeId *typeId,
                                          void *typeContext, const UA_NodeId *nodeId, void **nodeContext)
 {
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "New pump created");
-/* Find the NodeId of the status child variable */
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, pump251);
+
+    /* Find the NodeId of the status child variable */
     UA_RelativePathElement rpe;
     UA_RelativePathElement_init(&rpe);
     rpe.referenceTypeId = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
     rpe.isInverse = false;
     rpe.includeSubtypes = false;
-    rpe.targetName = UA_QUALIFIEDNAME(1, "Status");
+    rpe.targetName = UA_QUALIFIEDNAME(1, descrip4);
 
     UA_BrowsePath bp;
     UA_BrowsePath_init(&bp);
