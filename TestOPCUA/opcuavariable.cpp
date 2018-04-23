@@ -45,7 +45,7 @@ void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
     UA_WriteValue wv;
     UA_WriteValue_init(&wv);
     wv.nodeId = myIntegerNodeId;
-    wv.attributeId = UA_ATTRIBUTEID_VALUE;
+    wv.attributeId = /*UA_ATTRIBUTEID_VALUE*/ nsIndex;
     wv.value.status = UA_STATUSCODE_BADNOTCONNECTED;
     wv.value.hasStatus = true; UA_Server_write(server, &wv);
 
