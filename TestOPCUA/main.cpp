@@ -5,8 +5,8 @@ using namespace std;
 
 char descrip[1024] = "Test variable";
 char vers[1024] = "test";
-char descrip1[1024] = "Test variable1";
-char vers1[1024] = "test1";
+char descrip1[1024] = "Variable Test";
+char vers1[1024] = "1test";
 
 UA_Boolean running = true;
 void stopHandler(int sig)
@@ -25,7 +25,7 @@ int main()
     UA_Server *server = UA_Server_new(config);
 
     opcUAVariable uaIntGrips(descrip, vers, 1);
-    opcUAVariable uaIntGrips1(descrip1, vers1, 3);
+    opcUAVariable uaIntGrips1(descrip1, vers1, 2);
     uaIntGrips.addVariable32Int(server, 42);
     uaIntGrips.writeVariable(server, 42);
     uaIntGrips.writeWrongVariable(server);
