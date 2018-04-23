@@ -40,12 +40,12 @@ static void defineOPCUAServer(UA_Server *server)
                             UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE), oAttr, NULL, &robotId);
 
     UA_VariableAttributes mnAttr = UA_VariableAttributes_default;
-    UA_String manufacturerName = UA_STRING(manufactorerNameChar);
+    UA_String manufacturerName = UA_STRING(manufactorerNameString);
     UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
-    mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameString);
+    mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameChar);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, manufactorerNameString),
+                              UA_QUALIFIEDNAME(1, manufactorerNameChar),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               mnAttr, NULL, NULL);
 
@@ -108,7 +108,7 @@ int main()
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
 
-    while(t)
+    while(t == true)
     {
         string inputPoly(c.serverListen());
         cout << "Currently lisetning..." << endl;
