@@ -20,10 +20,11 @@ char local[1024] = "en-US";
 static void defineOPCUAServer(UA_Server *server)
 {
     UA_NodeId robotId;
-    /* get the nodeid assigned by the server */
+    /* get the nodeid assigned by the server*/
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
     oAttr.displayName = UA_LOCALIZEDTEXT(local, deviceNameString);
-    UA_Server_addObjectNode(server, UA_NODEID_NULL, UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
+    UA_Server_addObjectNode(server, UA_NODEID_NULL,
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
                             UA_QUALIFIEDNAME(1, deviceNameString),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE), oAttr, NULL, &robotId);
@@ -31,26 +32,21 @@ static void defineOPCUAServer(UA_Server *server)
     UA_VariableAttributes mnAttr = UA_VariableAttributes_default;
     UA_String manufacturerName = UA_STRING(manufactorerNameString);
     UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
-    mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameChar);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId, UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, manufactorerNameChar), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+    mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameString);
+    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, manufactorerNameChar),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               mnAttr, NULL, NULL);
-/*
-    UA_VariableAttributes modelAttr = UA_VariableAttributes_default;
-    UA_String modelName = UA_STRING(descrip10);
-    UA_Variant_setScalar(&modelAttr.value, &modelName, &UA_TYPES[UA_TYPES_STRING]);
-    modelAttr.displayName = UA_LOCALIZEDTEXT(local, descrip11);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, pumpId, UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, descrip11), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
-                              modelAttr, NULL, NULL);
-*/
+
     UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
     UA_Boolean openCloseBool = true;
     UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
     openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
     UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
-                              UA_QUALIFIEDNAME(1, openClose), UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              UA_QUALIFIEDNAME(1, openClose),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
                               openCloseAttr, NULL, NULL);
 
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
@@ -72,7 +68,14 @@ int main(void)
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
 
-    defineOPCUAServer(server);
+    //defineOPCUAServer(server);
+    char name[1024] = "Var1";
+    char vers[1024] = "Var1-Vers";
+
+    opcUAVariable var(name, vers, 1);
+    var.addVariable32Int(server, 40);
+    var.writeVariable(server, 40);
+    var.writeWrongVariable(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
     UA_Server_delete(server);
