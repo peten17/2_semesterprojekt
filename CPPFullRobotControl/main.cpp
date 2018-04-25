@@ -115,7 +115,7 @@ int main()
     td.server = UA_Server_new(config);
     cout << "Opc UA server running" << endl;
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) td.server);
+    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void) td.server);
 
     if(rc)
     {
@@ -180,7 +180,7 @@ int main()
     }
 */
     //UA_Server_run_shutdown(server);
-    UA_Server_delete(server);
+    UA_Server_delete(td.server);
     UA_ServerConfig_delete(config);
     pthread_exit(NULL);
     return retval;
