@@ -110,9 +110,9 @@ int main()
     do
     {
         defineOPCUAServer(server);
-        //retval = UA_Server_run(server, &running);
+        retval = UA_Server_run(server, &running);
 
-        retval = UA_Server_run_iterate(server, &running);
+        //retval = UA_Server_run_iterate(server, &running);
 
         cout << "Opc UA server running" << endl;
         cout << "Currently lisetning..." << endl;
