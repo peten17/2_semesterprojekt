@@ -99,9 +99,8 @@ int main()
     cout << "TCP Server binded" << endl;
 
     signal(2, stopHandler);
-    signal(2, stopHandler);
 
-    UA_ServerConfig *config = UA_ServerConfig_standard;
+    UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
 
 
