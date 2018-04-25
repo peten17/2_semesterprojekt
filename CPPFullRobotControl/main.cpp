@@ -99,8 +99,6 @@ static void defineOPCUAServer(void *threadarg)
     defineOPCUAServer(myData->server);
     retval = UA_Server_run(myData->server, &running);
 
-    x
-
     //retval = UA_Server_run_iterate(myData->server, &running);
 }
 
@@ -108,8 +106,8 @@ int main()
 {
     signal(2, stopHandler);
 
-    pthread_t threads[NUMTHREADS];
-    struct thread_data td[NUMTHREADS];
+    pthread_t threads;
+    struct thread_data td;
     int i = 0, rc;
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
