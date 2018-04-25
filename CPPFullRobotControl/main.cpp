@@ -38,7 +38,7 @@ struct thread_data
   UA_Server *server;
 };
 
-static void defineOPCUAServer(void *threadarg)
+static void *defineOPCUAServer(void *threadarg)
 {
     struct thread_data *myData;
     myData = (struct thread_data *) threadarg;
