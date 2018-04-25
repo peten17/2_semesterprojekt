@@ -101,7 +101,7 @@ int main()
     signal(2, stopHandler);
     signal(2, stopHandler);
 
-    UA_ServerConfig *config = UA_ServerConfig_standard();
+    UA_ServerConfig *config = UA_ServerConfig_standard;
     UA_Server *server = UA_Server_new(config);
 
 
