@@ -110,7 +110,7 @@ int main()
     do
     {
         defineOPCUAServer(server);
-        retval = UA_Server_run(server, &running);
+       // retval = UA_Server_run(server, &running);
 
         //retval = UA_Server_run_iterate(server, &running);
 
@@ -152,6 +152,7 @@ int main()
 
     }
 */
+    UA_Server_run_shutdown(server);
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     return retval;
