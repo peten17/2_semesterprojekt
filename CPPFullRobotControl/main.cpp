@@ -104,15 +104,13 @@ int main()
     UA_Server *server = UA_Server_new(config);
     UA_StatusCode retval;
 
-
-
     cout << "Opc UA server configed" << endl;
 
     do
     {
         defineOPCUAServer(server);
-        retval = UA_Server_run(server, &running);
-        //UA_Server_run_iterate(server, &running);
+        //retval = UA_Server_run(server, &running);
+        retval = UA_Server_run_iterate(server, &running);
 
         cout << "Opc UA server running" << endl;
         cout << "Currently lisetning..." << endl;
