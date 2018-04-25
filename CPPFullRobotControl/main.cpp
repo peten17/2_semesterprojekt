@@ -102,7 +102,7 @@ static void defineOPCUAServer(void *threadarg)
     //retval = UA_Server_run_iterate(myData->server, &running);
 }
 
-int main()
+int main(int *arg)
 {
     signal(2, stopHandler);
 
@@ -180,7 +180,7 @@ int main()
     }
 */
     //UA_Server_run_shutdown(server);
-    UA_Server_delete(thread_data.server);
+    UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     pthread_exit(NULL);
     return retval;
