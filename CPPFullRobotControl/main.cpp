@@ -102,7 +102,7 @@ static void defineOPCUAServer(void *threadarg)
     //retval = UA_Server_run_iterate(myData->server, &running);
 }
 
-int main(int *arg)
+int main(int argc, char *argv[])
 {
     signal(2, stopHandler);
 
