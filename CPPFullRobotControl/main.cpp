@@ -102,7 +102,7 @@ static void defineOPCUAServer(void *threadarg)
     //retval = UA_Server_run_iterate(myData->server, &running);
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     signal(2, stopHandler);
 
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     UA_Server *server = UA_Server_new(config);
     cout << "Opc UA server running" << endl;
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *) "thread 1");
+    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)"thread 1");
 
     if(rc)
     {
