@@ -97,7 +97,7 @@ static void defineOPCUAServer(void *threadarg)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
     defineOPCUAServer(myData->server);
-    retval = UA_Server_run(server, &running);
+    retval = UA_Server_run(myData->server, &running);
 
     x
 
