@@ -34,8 +34,10 @@ UA_Int16 force = 0;
 
 struct thread_data
 {
-  UA_Server *server;
+  UA_ServerConfig *config = UA_ServerConfig_new_default();
+  UA_Server *server = UA_Server_new(config);
 };
+
 static void defineOPCUAServer(void *threadarg)
 {
     struct thread_data *myData;
@@ -102,9 +104,6 @@ static void defineOPCUAServer(void *threadarg)
 
 int main()
 {
-    UA_ServerConfig *config = UA_ServerConfig_new_default();
-    UA_Server *server = UA_Server_new(config);
-
     pthread_t threads[NUMTHREADS];
     struct thread_data td[NUMTHREADS];
     int i = 0, rc;
@@ -175,8 +174,8 @@ int main()
     }
 */
     //UA_Server_run_shutdown(server);
-    UA_Server_delete(server);
-    UA_ServerConfig_delete(config);
+    UA_Server_delete(thread_data.server);
+    UA_ServerConfig_delete(thread_data.config);
     pthread_exit(NULL);
     return retval;
 }
