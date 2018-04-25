@@ -96,7 +96,6 @@ static void *defineOPCUAServer(void *threadarg)
                               UA_QUALIFIEDNAME(1, forceString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
-    defineOPCUAServer(myData->server);
     retval = UA_Server_run(myData->server, &running);
 
     //retval = UA_Server_run_iterate(myData->server, &running);
@@ -113,7 +112,7 @@ int main()
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     cout << "Opc UA server running" << endl;
     td.server = UA_Server_new(config);
-    cout << "Opc UA server running" << endl;
+    cout << "Opc UA server configured" << endl;
 
     rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
 
