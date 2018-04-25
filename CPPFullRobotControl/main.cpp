@@ -116,7 +116,7 @@ int main()
     cout << "Opc UA server running" << endl;
     while(t == true)
     {
-        UA_Server_run_iterate(server, false);
+        UA_Server_run_iterate(server, true);
         string inputPoly(c.serverListen());
         cout << "Currently lisetning..." << endl;
         if(inputPoly == "Open")
