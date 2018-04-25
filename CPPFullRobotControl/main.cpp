@@ -10,6 +10,7 @@ using namespace std;
 UA_Boolean running = true;
 bool t = true;
 UA_StatusCode retval;
+
 void stopHandler(int sig)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
@@ -34,8 +35,7 @@ UA_Int16 force = 0;
 
 struct thread_data
 {
-  UA_ServerConfig *config = UA_ServerConfig_new_default();
-  UA_Server *server = UA_Server_new(config);
+  UA_Server *server;
 };
 
 static void defineOPCUAServer(void *threadarg)
@@ -47,7 +47,7 @@ static void defineOPCUAServer(void *threadarg)
     /* get the nodeid assigned by the server*/
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
     oAttr.displayName = UA_LOCALIZEDTEXT(local, deviceNameString);
-    UA_Server_addObjectNode(server, UA_NODEID_NULL,
+    UA_Server_addObjectNode(myData->server, UA_NODEID_NULL,
                             UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
                             UA_QUALIFIEDNAME(1, deviceNameString),
@@ -57,7 +57,7 @@ static void defineOPCUAServer(void *threadarg)
     UA_String manufacturerName = UA_STRING(manufactorerNameString);
     UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
     mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameChar);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, manufactorerNameChar),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
@@ -66,7 +66,7 @@ static void defineOPCUAServer(void *threadarg)
     UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
     openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, openClose),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
@@ -75,7 +75,7 @@ static void defineOPCUAServer(void *threadarg)
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
     gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, aogBrowse),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), gripsAAttr, NULL, NULL);
@@ -83,7 +83,7 @@ static void defineOPCUAServer(void *threadarg)
     UA_VariableAttributes cycleAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&cycleAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
     cycleAttr.displayName = UA_LOCALIZEDTEXT(local, dutyCycleString);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, dutyCycleString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), cycleAttr, NULL, NULL);
@@ -91,28 +91,41 @@ static void defineOPCUAServer(void *threadarg)
     UA_VariableAttributes forceAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&forceAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
     forceAttr.displayName = UA_LOCALIZEDTEXT(local, forceString);
-    UA_Server_addVariableNode(server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, forceString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
     defineOPCUAServer(myData->server);
-   // retval = UA_Server_run(server, &running);
+    retval = UA_Server_run(server, &running);
 
-    retval = UA_Server_run_iterate(myData->server, &running);
+    x
+
+    //retval = UA_Server_run_iterate(myData->server, &running);
 }
 
 int main()
 {
+    signal(2, stopHandler);
+
     pthread_t threads[NUMTHREADS];
     struct thread_data td[NUMTHREADS];
     int i = 0, rc;
+
+    UA_ServerConfig *config = UA_ServerConfig_new_default();
+    cout << "Opc UA server running" << endl;
+    UA_Server *server = UA_Server_new(config);
+    cout << "Opc UA server running" << endl;
 
     rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)td);
 
     if(rc)
     {
         cout << "Unable to create thread, " << i << endl;
+    }
+    else
+    {
+        cout << "Currently multithreading - continueing" << endl;
     }
 
     int range = 100;
@@ -127,15 +140,10 @@ int main()
 
     cout << "TCP Server binded" << endl;
 
-    signal(2, stopHandler);
-
     //UA_Server_run_startup(server);
-
-    cout << "Opc UA server configed" << endl;
-
     do
     {
-        cout << "Opc UA server running" << endl;
+
         cout << "Currently lisetning..." << endl;
         string inputPoly(c.serverListen());
         if(inputPoly == "Open")
@@ -175,7 +183,7 @@ int main()
 */
     //UA_Server_run_shutdown(server);
     UA_Server_delete(thread_data.server);
-    UA_ServerConfig_delete(thread_data.config);
+    UA_ServerConfig_delete(config);
     pthread_exit(NULL);
     return retval;
 }
