@@ -101,7 +101,7 @@ int main()
     pthread_t threads[NUMTHREADS];
     int i = 1;
 
-    int rc = pthread_create(threads, NULL, defineOPCUAServer(server), (void *)i);
+    int rc = pthread_create(threads, NULL, defineOPCUAServer(server), i);
 
     if(rc)
     {
