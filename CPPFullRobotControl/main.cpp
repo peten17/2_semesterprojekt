@@ -32,8 +32,15 @@ UA_Double gripsAmount = 0;
 UA_Double dutyCycle = 0;
 UA_Int16 force = 0;
 
-static void defineOPCUAServer(UA_Server *server)
+struct thread_data
 {
+  UA_Server *server;
+};
+static void defineOPCUAServer(void *threadarg)
+{
+    struct thread_data *myData;
+    myData = (struct thread_data *) threadarg;
+
     UA_NodeId robotId;
     /* get the nodeid assigned by the server*/
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
@@ -87,10 +94,10 @@ static void defineOPCUAServer(UA_Server *server)
                               UA_QUALIFIEDNAME(1, forceString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
-    defineOPCUAServer(server);
+    defineOPCUAServer(myData->server);
    // retval = UA_Server_run(server, &running);
 
-    retval = UA_Server_run_iterate(server, &running);
+    retval = UA_Server_run_iterate(myData->server, &running);
 }
 
 int main()
@@ -99,9 +106,10 @@ int main()
     UA_Server *server = UA_Server_new(config);
 
     pthread_t threads[NUMTHREADS];
+    struct thread_data td[NUMTHREADS];
     int i = 0, rc;
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)i);
+    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)td);
 
     if(rc)
     {
