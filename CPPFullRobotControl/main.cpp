@@ -110,13 +110,13 @@ int main()
     cout << "Opc UA server configed" << endl;
 
     defineOPCUAServer(server);
-
+    UA_Server_run_iterate(server, &running);
     //UA_StatusCode retval = UA_Server_run(server, &running);
 
     cout << "Opc UA server running" << endl;
     while(t == true)
     {
-        UA_Server_run_iterate(server, true);
+
         string inputPoly(c.serverListen());
         cout << "Currently lisetning..." << endl;
         if(inputPoly == "Open")
