@@ -99,9 +99,9 @@ int main()
     UA_Server *server = UA_Server_new(config);
 
     pthread_t threads[NUMTHREADS];
-    int i = 1;
+    int i = 0, rc;
 
-    int rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)i);
+    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *)i);
 
     if(rc)
     {
