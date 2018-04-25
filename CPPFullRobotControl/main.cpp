@@ -103,6 +103,7 @@ int main()
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
     UA_StatusCode retval;
+    UA_Server_run_startup(server);
 
     cout << "Opc UA server configed" << endl;
 
@@ -110,6 +111,7 @@ int main()
     {
         defineOPCUAServer(server);
         //retval = UA_Server_run(server, &running);
+
         retval = UA_Server_run_iterate(server, &running);
 
         cout << "Opc UA server running" << endl;
