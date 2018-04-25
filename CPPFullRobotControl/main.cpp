@@ -4,11 +4,12 @@
 #include <opcuavariable.h>
 #include <pthread.h>
 
-#define NUMTHREADS 5;
+#define NUMTHREADS 5
 using namespace std;
 
 UA_Boolean running = true;
 bool t = true;
+UA_StatusCode retval;
 void stopHandler(int sig)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
@@ -94,9 +95,12 @@ static void defineOPCUAServer(UA_Server *server)
 
 int main()
 {
+    UA_ServerConfig *config = UA_ServerConfig_new_default();
+    UA_Server *server = UA_Server_new(config);
+
     pthread_t threads[NUMTHREADS];
 
-    int rc = pthread_create(threads, NULL, defineOPCUAServer(server), (void *) i);
+    int rc = pthread_create(threads, NULL, defineOPCUAServer(server), (void *) 1);
 
     if(rc)
     {
@@ -117,10 +121,7 @@ int main()
 
     signal(2, stopHandler);
 
-    UA_ServerConfig *config = UA_ServerConfig_new_default();
-    UA_Server *server = UA_Server_new(config);
-    UA_StatusCode retval;
-    UA_Server_run_startup(server);
+    //UA_Server_run_startup(server);
 
     cout << "Opc UA server configed" << endl;
 
@@ -164,7 +165,7 @@ int main()
 
     }
 */
-    UA_Server_run_shutdown(server);
+    //UA_Server_run_shutdown(server);
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     pthread_exit(NULL);
