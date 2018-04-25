@@ -115,7 +115,7 @@ int main()
     UA_Server *server = UA_Server_new(config);
     cout << "Opc UA server running" << endl;
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *) td[0]);
+    rc = pthread_create(&threads, NULL, defineOPCUAServer(server), (void *) td.server);
 
     if(rc)
     {
