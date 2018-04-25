@@ -101,22 +101,23 @@ int main()
     signal(2, stopHandler);
     signal(2, stopHandler);
 
-    UA_ServerConfig *config = UA_ServerConfig_new_default();
+    UA_ServerConfig *config = UA_ServerConfig_standard();
     UA_Server *server = UA_Server_new(config);
 
-    UA_Server_delete(server);
-    UA_ServerConfig_delete(config);
+
 
     cout << "Opc UA server configed" << endl;
 
     defineOPCUAServer(server);
-    UA_Server_run_iterate(server, &running);
-    //UA_StatusCode retval = UA_Server_run(server, &running);
+    //UA_Server_run_iterate(server, &running);
+    UA_StatusCode retval;
+    UA_Server_delete(server);
+    UA_ServerConfig_delete(config);
 
     cout << "Opc UA server running" << endl;
     while(t == true)
     {
-
+        retval = UA_Server_run(server, &running);
         string inputPoly(c.serverListen());
         cout << "Currently lisetning..." << endl;
         if(inputPoly == "Open")
@@ -147,5 +148,5 @@ int main()
         }
     }
 
-    return 0;
+    return retval;
 }
