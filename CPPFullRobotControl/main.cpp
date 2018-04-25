@@ -2,14 +2,18 @@
 #include <wiringPi.h>
 #include <server.h>
 #include <opcuavariable.h>
+#include <pthread.h>
 
+#define NUMTHREADS 5;
 using namespace std;
 
 UA_Boolean running = true;
+bool t = true;
 void stopHandler(int sig)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
     running = false;
+    t = false;
 }
 
 char openClose[1024] = "Open";
@@ -81,10 +85,24 @@ static void defineOPCUAServer(UA_Server *server)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, forceString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
+
+    defineOPCUAServer(server);
+   // retval = UA_Server_run(server, &running);
+
+    retval = UA_Server_run_iterate(server, &running);
 }
 
 int main()
 {
+    pthread_t threads[NUMTHREADS];
+
+    int rc = pthread_create(threads, NULL, defineOPCUAServer(server), (void *) i);
+
+    if(rc)
+    {
+        cout << "Unable to create thread, " << i << endl;
+    }
+
     int range = 100;
     wiringPiSetupGpio();
     pinMode(18, PWM_OUTPUT);
@@ -93,7 +111,6 @@ int main()
     pwmSetClock(24);
 
     Server c;
-    bool t = true;
     c.serverBind();
 
     cout << "TCP Server binded" << endl;
@@ -109,11 +126,6 @@ int main()
 
     do
     {
-        defineOPCUAServer(server);
-       // retval = UA_Server_run(server, &running);
-
-        retval = UA_Server_run_iterate(server, &running);
-
         cout << "Opc UA server running" << endl;
         cout << "Currently lisetning..." << endl;
         string inputPoly(c.serverListen());
@@ -155,5 +167,6 @@ int main()
     UA_Server_run_shutdown(server);
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
+    pthread_exit(NULL);
     return retval;
 }
