@@ -60,9 +60,10 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
     gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
     gripsAAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+    UA_Server_addVariableNode(myData->server, gripsNodeId, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, aogBrowse),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), gripsAAttr, NULL, NULL);
@@ -88,9 +89,10 @@ static void *defineOPCUAServer(void *threadarg)
 
 static void updateGrips(UA_Server *server)
 {
+    UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
     UA_Variant value;
-    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogBrowse);
-    UA_Variant_setScalar(&value, &currentNodeId, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_Server_writeValue(server, currentNodeId, value);
+    //UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogBrowse);
+    UA_Variant_setScalar(&value, &gripsNodeId, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_Server_writeValue(server, gripsNodeId, value);
 
 }
