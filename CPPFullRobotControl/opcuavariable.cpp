@@ -84,7 +84,7 @@ static void *defineOPCUAServer(void *threadarg)
     retval = UA_Server_run(myData->server, &running);
 }
 
-static void updateGrips(UA_server *server)
+static void updateGrips(UA_Server *server)
 {
     UA_Variant value;
     UA_Variant_setScalar(&value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
