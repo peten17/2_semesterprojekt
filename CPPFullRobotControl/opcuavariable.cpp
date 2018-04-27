@@ -1,23 +1,24 @@
 #include <open62541.h>
 
-bool t = true;
-char openClose[1024] = "Open";
-char aog[1024] = "Amount Of Grips";
-char aogBrowse[1024] = "Grips";
-char deviceNameString[1024] = "UR5 (Universal Robot 5)";
-char manufactorerNameString[1024] = "Dream Team";
-char manufactorerNameChar[1024] = "Manufactorer Name";
-char dutyCycleString[1024] = "Duty Cycle";
-char forceString[1024] = "Force";
-char local[1024] = "en-US";
+static bool t = true;
 
-UA_StatusCode retval;
-UA_Boolean openCloseBool = true;
-UA_Double gripsAmount = 0;
-UA_Double dutyCycle = 0;
-UA_Int16 force = 0;
+static char openClose[1024] = "Open";
+static char aog[1024] = "Amount Of Grips";
+static char aogBrowse[1024] = "Grips";
+static char deviceNameString[1024] = "UR5 (Universal Robot 5)";
+static char manufactorerNameString[1024] = "Dream Team";
+static char manufactorerNameChar[1024] = "Manufactorer Name";
+static char dutyCycleString[1024] = "Duty Cycle";
+static char forceString[1024] = "Force";
+static char local[1024] = "en-US";
 
-UA_Boolean running = true;
+static UA_StatusCode retval;
+static UA_Boolean openCloseBool = true;
+static UA_Double gripsAmount = 0;
+static UA_Double dutyCycle = 0;
+static UA_Int16 force = 0;
+
+static UA_Boolean running = true;
 struct thread_data
 {
     UA_Server *server;
