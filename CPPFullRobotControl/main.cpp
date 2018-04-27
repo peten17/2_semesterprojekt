@@ -8,20 +8,12 @@
 #define NUMTHREADS 5
 using namespace std;
 
-UA_Boolean running = true;
-
-
 void stopHandler(int sig)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
     running = false;
     t = false;
 }
-
-struct thread_data
-{
-  UA_Server *server;
-};
 
 static void *defineOPCUAServer(void *threadarg);
 

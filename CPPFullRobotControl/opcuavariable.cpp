@@ -17,6 +17,12 @@ UA_Double gripsAmount = 0;
 UA_Double dutyCycle = 0;
 UA_Int16 force = 0;
 
+UA_Boolean running = true;
+struct thread_data
+{
+    UA_Server *server;
+};
+
 static void *defineOPCUAServer(void *threadarg)
 {
     struct thread_data *myData;
