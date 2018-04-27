@@ -17,7 +17,7 @@ static UA_Boolean openCloseBool = true;
 static UA_Double gripsAmount = 0;
 static UA_Double dutyCycle = 0;
 static UA_Int16 force = 0;
-UA_NodeId robotId;
+static UA_NodeId robotId;
 
 static UA_Boolean running = true;
 struct thread_data
