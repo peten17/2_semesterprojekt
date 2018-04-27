@@ -82,10 +82,11 @@ int main()
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 0;
+            addValueCallback(td.server);
 
             inputPoly = "";
             //updateGrips(td.server);
-            addValueCallback(td.server);
+
         }
 
 
