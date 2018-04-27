@@ -14,7 +14,7 @@ static char local[1024] = "en-US";
 
 static UA_StatusCode retval;
 static UA_Boolean openCloseBool = true;
-static UA_Double gripsAmount = 0;
+static UA_Int16 gripsAmount = 0;
 static UA_Double dutyCycle = 0;
 static UA_Int16 force = 0;
 static UA_NodeId robotId;
@@ -59,7 +59,7 @@ static void *defineOPCUAServer(void *threadarg)
                               openCloseAttr, NULL, NULL);
 
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
-    UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
     UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
     gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
     gripsAAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
@@ -91,8 +91,9 @@ static void updateGrips(UA_Server *server)
 {
     UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
     UA_Variant value;
-    //UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogBrowse);
-    UA_Variant_setScalar(&value, &gripsNodeId, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
+    //UA_Variant_setScalar(&value, &gripsNodeId, &UA_TYPES[UA_TYPES_INT16]);
     UA_Server_writeValue(server, gripsNodeId, value);
 
 }
