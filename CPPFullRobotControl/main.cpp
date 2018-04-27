@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <server.h>
 #include <opcuavariable.cpp>
+#include <signal.h>
 
 
 #define NUMTHREADS 5
