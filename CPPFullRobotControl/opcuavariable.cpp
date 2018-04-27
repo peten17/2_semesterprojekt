@@ -30,7 +30,6 @@ static void *defineOPCUAServer(void *threadarg)
     struct thread_data *myData;
     myData = (struct thread_data *) threadarg;
 
-
     /* get the nodeid assigned by the server*/
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
     oAttr.displayName = UA_LOCALIZEDTEXT(local, deviceNameString);
@@ -91,6 +90,6 @@ static void updateGrips(UA_Server *server)
 {
     UA_Variant value;
     UA_Variant_setScalar(&value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_Server_writeValue(server, robotId, value);
+    UA_Server_writeValue(server, aogBrowse, value);
 
 }
