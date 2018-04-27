@@ -89,7 +89,7 @@ static void *defineOPCUAServer(void *threadarg)
 static void updateGrips(UA_Server *server)
 {
     UA_Variant value;
-    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogbrowse);
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogBrowse);
     UA_Variant_setScalar(&value, &currentNodeId, &UA_TYPES[UA_TYPES_DOUBLE]);
     UA_Server_writeValue(server, aogBrowse, value);
 
