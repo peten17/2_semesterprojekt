@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    int range = 100;
+    int range = 200;
     int input = 0, inputMenu = 0;
     double buf;
 
@@ -15,7 +15,7 @@ int main()
     pinMode(18, PWM_OUTPUT);
     pwmSetMode (PWM_MODE_MS);
     pwmSetRange (range);
-    pwmSetClock (24);
+    pwmSetClock (1920);
 
     if(wiringPiSetup() == -1)
     {
@@ -38,12 +38,12 @@ int main()
 
         if(inputMenu == 1)
         {
-            while(input != 2001)
+            while(input != (range + 1))
             {
                 cout << "Waiting for new input: " << endl;
                 cin >> input;
                 buf = input;
-                if(input > 2000 && input != 2001)
+                if(input > range && input != (range + 1))
                 {
                     cout << "Invalid input. Duty cycle set to maximum.";
                     cout << "Current duty cycle: " << "100" << "%" << endl;
@@ -57,7 +57,7 @@ int main()
                     pwmWrite(18, 0);
 
                 }
-                else if(input == 2001)
+                else if(input == (range + 1))
                 {
                     break;
                 }
