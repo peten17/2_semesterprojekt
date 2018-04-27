@@ -91,7 +91,7 @@ std::string Server::serverListen()
     //*buf: pointer to buffer that receives the data
     //N: the length in bytes of the buffer pointed to by the *buf parameter
     _valread = read(_new_socket , _buffer, 1024);
-    std::cout << "%s\n" << _buffer << std::endl;
+    std::cout << "\n" << _buffer << std::endl;
 
     //Sends a message to the connected client
     //send(int socket, const void *buf, size_t length, flags)
@@ -99,8 +99,8 @@ std::string Server::serverListen()
     //*buf: pointer to the buffer which contains the send message
     //length: the length of the buffer.
     //flag: ??
-    send(_new_socket , _hello , strlen(_hello) , 0);
-    std::cout << "Hello message sent." << std::endl;
+    /*send(_new_socket , _hello , strlen(_hello) , 0);
+    std::cout << "Hello message sent." << std::endl;*/
 
     return _buffer;
 }
