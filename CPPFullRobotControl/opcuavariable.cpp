@@ -120,6 +120,6 @@ static void addValueCallback(UA_Server *server)
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
     UA_ValueCallback callback;
     callback.onRead = beforeReadTime;
-   // callback.onWrite = afterWriteTime;
+    callback.onWrite = afterWriteTime;
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
