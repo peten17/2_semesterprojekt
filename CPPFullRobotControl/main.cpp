@@ -32,7 +32,7 @@ int main()
     cout << "Opc UA server configured" << endl;
 
     rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
-    addValueCallback(td.server);
+
 
     if(rc)
     {
@@ -85,6 +85,7 @@ int main()
 
             inputPoly = "";
             //updateGrips(td.server);
+            addValueCallback(td.server);
         }
 
 
