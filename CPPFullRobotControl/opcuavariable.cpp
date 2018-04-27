@@ -90,7 +90,7 @@ static void updateGrips(UA_Server *server)
 {
     UA_Variant value;
     UA_Variant_setScalar(&value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_NodeId currentNodeId = UA_NODEID_STRING(0, aog);
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
     UA_Server_writeValue(server, currentNodeId, value);
 
 }
