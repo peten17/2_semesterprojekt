@@ -93,6 +93,6 @@ static void updateGrips(UA_Server *server)
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
     //UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
     UA_Variant_setScalar(&gripsAAttr.value, &gripsNodeId, &UA_TYPES[UA_TYPES_INT16]);
-    UA_Server_writeValue(server, gripsNodeId, value);
+    UA_Server_writeValue(server, gripsNodeId, gripsAAttr.value);
 
 }
