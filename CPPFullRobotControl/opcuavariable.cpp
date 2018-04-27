@@ -17,6 +17,7 @@ static UA_Boolean openCloseBool = true;
 static UA_Double gripsAmount = 0;
 static UA_Double dutyCycle = 0;
 static UA_Int16 force = 0;
+UA_NodeId robotId;
 
 static UA_Boolean running = true;
 struct thread_data
@@ -29,7 +30,7 @@ static void *defineOPCUAServer(void *threadarg)
     struct thread_data *myData;
     myData = (struct thread_data *) threadarg;
 
-    UA_NodeId robotId;
+
     /* get the nodeid assigned by the server*/
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
     oAttr.displayName = UA_LOCALIZEDTEXT(local, deviceNameString);
@@ -90,7 +91,6 @@ static void updateGrips(UA_Server *server)
 {
     UA_Variant value;
     UA_Variant_setScalar(&value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
-    UA_Server_writeValue(server, currentNodeId, value);
+    UA_Server_writeValue(server, robotId, value);
 
 }
