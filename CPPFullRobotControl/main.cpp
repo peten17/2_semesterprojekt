@@ -77,13 +77,13 @@ int main()
             delay(2000);
 
             openCloseBool = false;
-            //gripsAmount++;
+            gripsAmount++;
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 0;
 
             inputPoly = "";
-            updateGrips(td.server);
+            addValueCallback(server);
         }
 
 

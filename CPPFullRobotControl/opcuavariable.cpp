@@ -94,5 +94,32 @@ static void updateGrips(UA_Server *server)
     //UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
     UA_Variant_setScalar(&gripsAAttr.value, &gripsNodeId, &UA_TYPES[UA_TYPES_INT16]);
     UA_Server_writeValue(server, gripsNodeId, gripsAAttr.value);
+}
 
+static void beforeReadTime(UA_Server *server,
+                           const UA_NodeId *sessionId, void *sessionContext,
+                           const UA_NodeId *nodeid, void *nodeContext,
+                           const UA_NumericRange *range, const UA_DataValue *data)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
+    UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
+    UA_Server_writeValue(server, currentNodeId, gripsAAttr.value);
+}
+
+static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
+                           void *sessionContext, const UA_NodeId *nodeId,
+                           void *nodeContext, const UA_NumericRange *range,
+                           const UA_DataValue *data)
+{
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "The variable was updated");
+}
+
+static void addValueCallback(UA_Server *server)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
+    UA_ValueCallback callback;
+    callback.onRead = beforeReadTime;
+    callback.onWrite = afterWriteTime;
+    UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
