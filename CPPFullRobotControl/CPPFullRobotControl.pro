@@ -11,5 +11,4 @@ SOURCES += \
 
 HEADERS += \
     open62541.h \
-    server.h \
-    opcuavariable.h
+    server.h

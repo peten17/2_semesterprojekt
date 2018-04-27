@@ -1,66 +1,88 @@
-#include "opcuavariable.h"
+#include <open62541.h>
 
-opcUAVariable::opcUAVariable()
+bool t = true;
+char openClose[1024] = "Open";
+char aog[1024] = "Amount Of Grips";
+char aogBrowse[1024] = "Grips";
+char deviceNameString[1024] = "UR5 (Universal Robot 5)";
+char manufactorerNameString[1024] = "Dream Team";
+char manufactorerNameChar[1024] = "Manufactorer Name";
+char dutyCycleString[1024] = "Duty Cycle";
+char forceString[1024] = "Force";
+char local[1024] = "en-US";
+
+UA_StatusCode retval;
+UA_Boolean openCloseBool = true;
+UA_Double gripsAmount = 0;
+UA_Double dutyCycle = 0;
+UA_Int16 force = 0;
+
+static void *defineOPCUAServer(void *threadarg)
 {
+    struct thread_data *myData;
+    myData = (struct thread_data *) threadarg;
 
+    UA_NodeId robotId;
+    /* get the nodeid assigned by the server*/
+    UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
+    oAttr.displayName = UA_LOCALIZEDTEXT(local, deviceNameString);
+    UA_Server_addObjectNode(myData->server, UA_NODEID_NULL,
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
+                            UA_QUALIFIEDNAME(1, deviceNameString),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE), oAttr, NULL, &robotId);
+
+    UA_VariableAttributes mnAttr = UA_VariableAttributes_default;
+    UA_String manufacturerName = UA_STRING(manufactorerNameString);
+    UA_Variant_setScalar(&mnAttr.value, &manufacturerName, &UA_TYPES[UA_TYPES_STRING]);
+    mnAttr.displayName = UA_LOCALIZEDTEXT(local, manufactorerNameChar);
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, manufactorerNameChar),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              mnAttr, NULL, NULL);
+
+    UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
+    openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, openClose),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
+                              openCloseAttr, NULL, NULL);
+
+    UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
+    gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, aogBrowse),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), gripsAAttr, NULL, NULL);
+
+    UA_VariableAttributes cycleAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&cycleAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
+    cycleAttr.displayName = UA_LOCALIZEDTEXT(local, dutyCycleString);
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, dutyCycleString),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), cycleAttr, NULL, NULL);
+
+    UA_VariableAttributes forceAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&forceAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
+    forceAttr.displayName = UA_LOCALIZEDTEXT(local, forceString);
+    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
+                              UA_QUALIFIEDNAME(1, forceString),
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
+
+    retval = UA_Server_run(myData->server, &running);
 }
 
-opcUAVariable::opcUAVariable(char* varName, char* vers)
+static void updateGrips(UA_server *server)
 {
-    variableName = varName;
-    version = vers;
-}
+    UA_Variant value;
+    UA_Variant_setScalar(&value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, aogBrowse);
+    UA_Server_writeValue(server, currentNodeId, value);
 
-void opcUAVariable::addVariable32Int(UA_Server *server, UA_Int32 uaInt)
-{
-    UA_VariableAttributes attr = UA_VariableAttributes_default;
-
-    UA_Variant_setScalar(&attr.value, &uaInt, &UA_TYPES[UA_TYPES_INT32]);
-
-    attr.description = UA_LOCALIZEDTEXT(local, variableName);
-    attr.displayName = UA_LOCALIZEDTEXT(local, variableName);
-    attr.dataType = UA_TYPES[UA_TYPES_INT32].typeId;
-    attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
-    UA_QualifiedName myIntegerName = UA_QUALIFIEDNAME(1, variableName);
-    UA_NodeId parentNodeId = UA_NODEID_NUMERIC((0), UA_NS0ID_OBJECTSFOLDER);
-    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC((0), UA_NS0ID_ORGANIZES);
-
-    UA_Server_addVariableNode(server, myIntegerNodeId, parentNodeId, parentReferenceNodeId,
-                              myIntegerName, UA_NODEID_NUMERIC((0), UA_NS0ID_BASEDATAVARIABLETYPE),
-                              attr, NULL, NULL);
-}
-
-void opcUAVariable::writeVariable(UA_Server *server, UA_Int32 uaInt)
-{
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
-    /* Write a different integer value */
-    UA_Variant_init(&myVar);
-    UA_Variant_setScalar(&myVar, &uaInt, &UA_TYPES[UA_TYPES_INT32]);
-    UA_Server_writeValue(server, myIntegerNodeId, myVar);
-
-    UA_WriteValue wv;
-    UA_WriteValue_init(&wv);
-    wv.nodeId = myIntegerNodeId;
-    wv.attributeId = UA_ATTRIBUTEID_VALUE;
-    wv.value.status = UA_STATUSCODE_BADNOTCONNECTED;
-    wv.value.hasStatus = true;
-    UA_Server_write(server, &wv);
-
-    wv.value.hasStatus = false;
-    wv.value.value = myVar;
-    wv.value.hasValue = true;
-    UA_Server_write(server, &wv);
-}
-
-void opcUAVariable::writeWrongVariable(UA_Server *server)
-{
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, variableName);
-    /* Write a string */
-    UA_String myString = UA_STRING(version);
-    UA_Variant_init(&myVar);
-    UA_Variant_setScalar(&myVar, &myString, &UA_TYPES[UA_TYPES_STRING]);
-    UA_StatusCode retval = UA_Server_writeValue(server, myIntegerNodeId, myVar);
-    std::cout << ("Writing a string returned statuscode \n", UA_StatusCode_name(retval));
 }
