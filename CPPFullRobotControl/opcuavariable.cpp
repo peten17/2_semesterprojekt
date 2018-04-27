@@ -61,6 +61,7 @@ static void *defineOPCUAServer(void *threadarg)
     UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_DOUBLE]);
     gripsAAttr.displayName = UA_LOCALIZEDTEXT(local, aog);
+    gripsAAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, aogBrowse),
