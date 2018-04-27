@@ -83,7 +83,8 @@ int main()
             dutyCycle = 0;
 
             inputPoly = "";
-            addValueCallback(server);
+            //updateGrips(td.server);
+            addValueCallback(td.server);
         }
 
 
