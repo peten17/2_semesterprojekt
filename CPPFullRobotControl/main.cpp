@@ -67,12 +67,12 @@ int main()
 
             openCloseBool = true;
             dutyCycle = (2/range * 100);
-            force = forceVal;
+            force = atoi(forceVal);
 
             addValueCallbackOpenClose(td.server);
             addValueCallbackDuty(td.server);
             addValueCallbackForce(td.server);
-            forceVal = 0;
+            forceVal = "";
             openCloseVal = 2;
 
         }
@@ -84,13 +84,13 @@ int main()
             openCloseBool = false;
             gripsAmount++;
             dutyCycle = (10/range * 100);
-            force = forceVal;
+            force = atoi(forceVal);
 
             addValueCallbackGrips(td.server);
             addValueCallbackForce(td.server);
             addValueCallbackOpenClose(td.server);
             addValueCallbackDuty(td.server);
-            forceVal = 0;
+            forceVal = "";
             openCloseVal = 2;
         }
 
