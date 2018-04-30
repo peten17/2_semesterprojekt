@@ -28,7 +28,7 @@ int main()
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     cout << "Opc UA server running" << endl;
-    config->logger = 700;
+    config->logger = UA_LOGLEVEL_FATAL;
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
 
