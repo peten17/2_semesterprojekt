@@ -31,11 +31,6 @@ int main()
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
 
-    addValueCallbackGrips(td.server);
-    addValueCallbackForce(td.server);
-    addValueCallbackOpenClose(td.server);
-    addValueCallbackDuty(td.server);
-
     rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
 
     if(rc)
@@ -47,12 +42,12 @@ int main()
         cout << "Currently multithreading - continuing" << endl;
     }
 
-    int range = 100;
+    int range = 10;
     wiringPiSetupGpio();
     pinMode(18, PWM_OUTPUT);
     pwmSetMode(PWM_MODE_MS);
     pwmSetRange(range);
-    pwmSetClock(24);
+    pwmSetClock(1920);
 
     Server c;
     c.serverBind();
@@ -61,35 +56,37 @@ int main()
     do
     {
 
-        cout << "Currently lisetning..." << endl;
+        cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
         if(inputPoly == "Open")
         {
             cout << "Received open node." << endl;
-            pwmWrite(18, 50);
-            delay(2000);
+            pwmWrite(18, 2);
 
             openCloseBool = true;
-            dutyCycle = 50;
+            dutyCycle = (2/range * 100);
 
             inputPoly = "";
+            addValueCallbackOpenClose(td.server);
+            addValueCallbackDuty(td.server);
         }
 
         else
         {
             cout << "Received close node." << endl;
-            pwmWrite(18, 0);
-            delay(2000);
+            pwmWrite(18, 10);
 
             openCloseBool = false;
             gripsAmount++;
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
-            dutyCycle = 100;
-
-
+            dutyCycle = (10/range * 100);
 
             inputPoly = "";
+            addValueCallbackGrips(td.server);
+            addValueCallbackForce(td.server);
+            addValueCallbackOpenClose(td.server);
+            addValueCallbackDuty(td.server);
         }
 
 
