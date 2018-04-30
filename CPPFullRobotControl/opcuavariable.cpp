@@ -96,7 +96,7 @@ static void updateGrips(UA_Server *server)
     UA_Server_writeValue(server, gripsNodeId, gripsAAttr.value);
 }
 
-static void beforeReadTime(UA_Server *server,
+static void beforeReadTimeGrips(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
                            const UA_NumericRange *range, const UA_DataValue *data)
@@ -107,6 +107,39 @@ static void beforeReadTime(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, gripsAAttr.value);
 }
 
+static void beforeReadTimeDuty(UA_Server *server,
+                           const UA_NodeId *sessionId, void *sessionContext,
+                           const UA_NodeId *nodeid, void *nodeContext,
+                           const UA_NumericRange *range, const UA_DataValue *data)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, dutyCycleString);
+    UA_VariableAttributes dutyAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&dutyAAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_Server_writeValue(server, currentNodeId, gripsAAttr.value);
+}
+
+static void beforeReadTimeOpenClose(UA_Server *server,
+                           const UA_NodeId *sessionId, void *sessionContext,
+                           const UA_NodeId *nodeid, void *nodeContext,
+                           const UA_NumericRange *range, const UA_DataValue *data)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, openClose);
+    UA_VariableAttributes openCloseAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&openCloseAAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
+    UA_Server_writeValue(server, currentNodeId, openCloseAAttr.value);
+}
+
+static void beforeReadTimeForce(UA_Server *server,
+                           const UA_NodeId *sessionId, void *sessionContext,
+                           const UA_NodeId *nodeid, void *nodeContext,
+                           const UA_NumericRange *range, const UA_DataValue *data)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, forceString);
+    UA_VariableAttributes forceAAttr = UA_VariableAttributes_default;
+    UA_Variant_setScalar(&forceAAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
+    UA_Server_writeValue(server, currentNodeId, forceAAttr.value);
+}
+
 static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            void *sessionContext, const UA_NodeId *nodeId,
                            void *nodeContext, const UA_NumericRange *range,
@@ -115,11 +148,39 @@ static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "The variable was updated");
 }
 
-static void addValueCallback(UA_Server *server)
+static void addValueCallbackGrips(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
     UA_ValueCallback callback;
-    callback.onRead = beforeReadTime;
+    callback.onRead = beforeReadTimeGrips;
     callback.onWrite = afterWriteTime;
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
+
+static void addValueCallbackForce(UA_Server *server)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, forceString);
+    UA_ValueCallback callback;
+    callback.onRead = beforeReadTimeForce;
+    callback.onWrite = afterWriteTime;
+    UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
+}
+
+static void addValueCallbackOpenClose(UA_Server *server)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, openClose);
+    UA_ValueCallback callback;
+    callback.onRead = beforeReadTimeOpenClose;
+    callback.onWrite = afterWriteTime;
+    UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
+}
+
+static void addValueCallbackDuty(UA_Server *server)
+{
+    UA_NodeId currentNodeId = UA_NODEID_STRING(1, dutyCycleString);
+    UA_ValueCallback callback;
+    callback.onRead = dutyCycle;
+    callback.onWrite = afterWriteTime;
+    UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
+}
+
