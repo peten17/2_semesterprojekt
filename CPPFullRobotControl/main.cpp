@@ -92,7 +92,6 @@ int main()
             addValueCallbackDuty(td.server);
 
             inputPoly = "";
-            break;
         }
 
 
