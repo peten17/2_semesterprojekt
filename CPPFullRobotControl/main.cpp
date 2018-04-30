@@ -57,11 +57,10 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        string::size_type sz;
-        int openCloseVal = stoi(inputPoly.substr(0, 1), &sz, 10);
-        int forceVal = stoi(inputPoly.substr(1, 3), &sz, 10);
+        int openCloseVal = inputPoly.substr(0, 1);
+        int forceVal = inputPoly.substr(1, 3);
 
-        if(openCloseVal = 1)
+        if(openCloseVal == "1")
         {
             cout << "Received open node." << endl;
             pwmWrite(18, 2);
@@ -77,7 +76,7 @@ int main()
             openCloseVal = 2;
 
         }
-        else if(openCloseVal = 0)
+        else if(openCloseVal == "0")
         {
             cout << "Received close node." << endl;
             pwmWrite(18, 10);
