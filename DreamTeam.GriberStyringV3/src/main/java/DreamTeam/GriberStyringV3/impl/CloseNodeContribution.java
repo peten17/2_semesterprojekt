@@ -32,7 +32,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	/*--------- Send to server variables ---------*/
 	private final String popupTitle = "From Close Node: ";
 	private final String message = "I will ask to close gripper";
-	private final String command = "Close";
+	private final String command = "0";
 	private String force = "";
 	private final String STATIC_IP_ADD = "10.125.45.176";
 	private final int STATIC_Port = 8080;
@@ -52,7 +52,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	public void radio75Select(InputEvent event){
 		if (event.getEventType() == InputEvent.EventType.ON_CHANGE){
 			//label.setVisible(false);
-			force = "75";
+			force = "075";
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	
 	public CloseNodeContribution(DataModel model, URCapAPI api){
 		this.model = model;
-		this.force = "50";
+		this.force = "050";
 		this.api = api;
 	}
 
