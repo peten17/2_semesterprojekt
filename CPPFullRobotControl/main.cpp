@@ -21,7 +21,6 @@ static void *defineOPCUAServer(void *threadarg);
 int main()
 {
     signal(2, stopHandler);
-    UA_LogLevel = 6;
 
     pthread_t threads;
     struct thread_data td;
@@ -29,6 +28,7 @@ int main()
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     cout << "Opc UA server running" << endl;
+    config->logger = 700;
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
 
