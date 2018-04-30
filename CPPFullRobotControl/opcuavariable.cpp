@@ -151,7 +151,7 @@ static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            void *nodeContext, const UA_NumericRange *range,
                            const UA_DataValue *data)
 {
-    UA_LOG_INFO(NULL, UA_LOGCATEGORY_CLIENT, NULL);
+    UA_LOG_INFO(UA_Log_Stdout, NULL, NULL);
 }
 
 static void addValueCallbackGrips(UA_Server *server)
