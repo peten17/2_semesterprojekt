@@ -179,7 +179,7 @@ static void addValueCallbackDuty(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, dutyCycleString);
     UA_ValueCallback callback;
-    callback.onRead = dutyCycle;
+    callback.onRead = beforeReadTimeDuty;
     callback.onWrite = afterWriteTime;
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
