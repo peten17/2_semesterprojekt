@@ -115,7 +115,7 @@ static void beforeReadTimeDuty(UA_Server *server,
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, dutyCycleString);
     UA_VariableAttributes dutyAAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&dutyAAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_Server_writeValue(server, currentNodeId, gripsAAttr.value);
+    UA_Server_writeValue(server, currentNodeId, dutyAAttr.value);
 }
 
 static void beforeReadTimeOpenClose(UA_Server *server,
