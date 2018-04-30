@@ -30,6 +30,10 @@ int main()
     cout << "Opc UA server running" << endl;
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
+    addValueCallbackGrips(td.server);
+    addValueCallbackForce(td.server);
+    addValueCallbackOpenClose(td.server);
+    addValueCallbackDuty(td.server);
 
     rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
 
@@ -82,10 +86,6 @@ int main()
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 100;
-            addValueCallbackGrips(td.server);
-            addValueCallbackForce(td.server);
-            addValueCallbackOpenClose(td.server);
-            addValueCallbackDuty(td.server);
 
             inputPoly = "";
             //updateGrips(td.server);
