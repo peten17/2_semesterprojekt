@@ -81,7 +81,7 @@ int main()
             gripsAmount++;
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
-            dutyCycle = 0;
+            dutyCycle = 100;
             addValueCallbackGrips(td.server);
             addValueCallbackForce(td.server);
             addValueCallbackOpenClose(td.server);
