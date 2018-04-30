@@ -84,7 +84,7 @@ static void *defineOPCUAServer(void *threadarg)
     UA_Variant_setScalar(&forceAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
     UA_NodeId forceNodeId = UA_NODEID_STRING(1, aog);
     forceAttr.displayName = UA_LOCALIZEDTEXT(local, forceString);
-    forceAAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    forceAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_Server_addVariableNode(myData->server, forceNodeId, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, forceString),
