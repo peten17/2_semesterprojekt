@@ -57,8 +57,9 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        int openCloseVal = stoi(inputPoly.substr(0, 1), 0, 10);
-        int forceVal = stoi(inputPoly.substr(1, 3), 0, 10);
+        string::size_type sz;
+        int openCloseVal = stoi(inputPoly.substr(0, 1), &sz, 10);
+        int forceVal = stoi(inputPoly.substr(1, 3), &sz, 10);
 
         if(openCloseVal = 1)
         {
