@@ -57,8 +57,8 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        int openCloseVal = inputPoly.substr(0, 1);
-        int forceVal = inputPoly.substr(1, 3);
+        char openCloseVal = inputPoly.substr(0, 1);
+        char* forceVal[4] = inputPoly.substr(1, 3);
 
         if(openCloseVal == "1")
         {
