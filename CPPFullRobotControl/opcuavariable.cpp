@@ -93,6 +93,14 @@ static void *defineOPCUAServer(void *threadarg)
     retval = UA_Server_run(myData->server, &running);
 }
 
+static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
+                           void *sessionContext, const UA_NodeId *nodeId,
+                           void *nodeContext, const UA_NumericRange *range,
+                           const UA_DataValue *data)
+{
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_CLIENT, NULL);
+}
+
 static void updateGrips(UA_Server *server)
 {
     UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
@@ -144,14 +152,6 @@ static void beforeReadTimeForce(UA_Server *server,
     UA_VariableAttributes forceAAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&forceAAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
     UA_Server_writeValue(server, currentNodeId, forceAAttr.value);
-}
-
-static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
-                           void *sessionContext, const UA_NodeId *nodeId,
-                           void *nodeContext, const UA_NumericRange *range,
-                           const UA_DataValue *data)
-{
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_CLIENT, NULL);
 }
 
 static void addValueCallbackGrips(UA_Server *server)

@@ -21,7 +21,7 @@ static void *defineOPCUAServer(void *threadarg);
 int main()
 {
     signal(2, stopHandler);
-    UA_LogLevel = 700;
+    UA_LogLevel = 6;
 
     pthread_t threads;
     struct thread_data td;
