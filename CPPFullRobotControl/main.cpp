@@ -21,6 +21,7 @@ static void *defineOPCUAServer(void *threadarg);
 int main()
 {
     signal(2, stopHandler);
+    UA_LogLevel = 700;
 
     pthread_t threads;
     struct thread_data td;
@@ -31,12 +32,7 @@ int main()
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
-    addValueCallbackGrips(td.server);
-    addValueCallbackForce(td.server);
-    addValueCallbackOpenClose(td.server);
-    addValueCallbackDuty(td.server);
-
+    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);    
 
     if(rc)
     {
@@ -44,7 +40,7 @@ int main()
     }
     else
     {
-        cout << "Currently multithreading - continueing" << endl;
+        cout << "Currently multithreading - continuing" << endl;
     }
 
     int range = 100;
@@ -89,6 +85,11 @@ int main()
             /*int pos = inputPoly.find(';'); //stream
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 100;
+
+            addValueCallbackGrips(td.server);
+            addValueCallbackForce(td.server);
+            addValueCallbackOpenClose(td.server);
+            addValueCallbackDuty(td.server);
 
             inputPoly = "";
         }
