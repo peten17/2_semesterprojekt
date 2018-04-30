@@ -152,7 +152,6 @@ static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            const UA_DataValue *data)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "The variable was updated");
-    continue;
 }
 
 static void addValueCallbackGrips(UA_Server *server)

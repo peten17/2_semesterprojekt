@@ -92,8 +92,7 @@ int main()
             addValueCallbackDuty(td.server);
 
             inputPoly = "";
-            //updateGrips(td.server);
-
+            continue;
         }
 
 
