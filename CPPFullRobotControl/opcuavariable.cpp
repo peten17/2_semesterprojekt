@@ -51,8 +51,10 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
+    UA_NodeId openCloseNodeId = UA_NODEID_STRING(1, aog);
     openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
-    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+    openCloseAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    UA_Server_addVariableNode(myData->server, openCloseNodeId, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, openClose),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),
@@ -70,16 +72,20 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes cycleAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&cycleAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
+    UA_NodeId cycleNodeId = UA_NODEID_STRING(1, aog);
     cycleAttr.displayName = UA_LOCALIZEDTEXT(local, dutyCycleString);
-    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+    cycleAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    UA_Server_addVariableNode(myData->server, cycleNodeId, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, dutyCycleString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), cycleAttr, NULL, NULL);
 
     UA_VariableAttributes forceAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&forceAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
+    UA_NodeId forceNodeId = UA_NODEID_STRING(1, aog);
     forceAttr.displayName = UA_LOCALIZEDTEXT(local, forceString);
-    UA_Server_addVariableNode(myData->server, UA_NODEID_NULL, robotId,
+    forceAAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    UA_Server_addVariableNode(myData->server, forceNodeId, robotId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),
                               UA_QUALIFIEDNAME(1, forceString),
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
