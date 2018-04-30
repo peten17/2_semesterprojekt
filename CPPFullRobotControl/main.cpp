@@ -30,11 +30,11 @@ int main()
     cout << "Opc UA server running" << endl;
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
-    UA_Server_addRepeatedJob(td.server, addValueCallbackDuty(td.server), 2000, 1);
-    /*addValueCallbackGrips(td.server);
+
+    addValueCallbackGrips(td.server);
     addValueCallbackForce(td.server);
     addValueCallbackOpenClose(td.server);
-    addValueCallbackDuty(td.server);*/
+    addValueCallbackDuty(td.server);
 
     rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
 
