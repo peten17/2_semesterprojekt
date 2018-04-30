@@ -51,7 +51,7 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes openCloseAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&openCloseAttr.value, &openCloseBool, &UA_TYPES[UA_TYPES_BOOLEAN]);
-    UA_NodeId openCloseNodeId = UA_NODEID_STRING(1, aog);
+    UA_NodeId openCloseNodeId = UA_NODEID_STRING(1, openClose);
     openCloseAttr.displayName = UA_LOCALIZEDTEXT(local, openClose);
     openCloseAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_Server_addVariableNode(myData->server, openCloseNodeId, robotId,
@@ -72,7 +72,7 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes cycleAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&cycleAttr.value, &dutyCycle, &UA_TYPES[UA_TYPES_DOUBLE]);
-    UA_NodeId cycleNodeId = UA_NODEID_STRING(1, aog);
+    UA_NodeId cycleNodeId = UA_NODEID_STRING(1, dutyCycleString);
     cycleAttr.displayName = UA_LOCALIZEDTEXT(local, dutyCycleString);
     cycleAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_Server_addVariableNode(myData->server, cycleNodeId, robotId,
@@ -82,7 +82,7 @@ static void *defineOPCUAServer(void *threadarg)
 
     UA_VariableAttributes forceAttr = UA_VariableAttributes_default;
     UA_Variant_setScalar(&forceAttr.value, &force, &UA_TYPES[UA_TYPES_INT16]);
-    UA_NodeId forceNodeId = UA_NODEID_STRING(1, aog);
+    UA_NodeId forceNodeId = UA_NODEID_STRING(1, forceString);
     forceAttr.displayName = UA_LOCALIZEDTEXT(local, forceString);
     forceAttr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_Server_addVariableNode(myData->server, forceNodeId, robotId,
