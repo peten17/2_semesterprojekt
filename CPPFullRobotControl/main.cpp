@@ -55,38 +55,43 @@ int main()
 
     do
     {
-
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        if(inputPoly == "Open")
+        int openCloseVal = inputPoly.substr(0, 1);
+        int forceVal = inputPoly.substr(1, 3);
+
+        if(openCloseVal = 1)
         {
             cout << "Received open node." << endl;
             pwmWrite(18, 2);
 
             openCloseBool = true;
             dutyCycle = (2/range * 100);
+            force = forceVal;
 
-            inputPoly = "";
             addValueCallbackOpenClose(td.server);
             addValueCallbackDuty(td.server);
-        }
+            addValueCallbackForce(td.server);
+            forceVal = 0;
+            openCloseVal = 2;
 
-        else
+        }
+        else if(openCloseVal = 0)
         {
             cout << "Received close node." << endl;
             pwmWrite(18, 10);
 
             openCloseBool = false;
             gripsAmount++;
-            /*int pos = inputPoly.find(';'); //stream
-            force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = (10/range * 100);
+            force = forceVal;
 
-            inputPoly = "";
             addValueCallbackGrips(td.server);
             addValueCallbackForce(td.server);
             addValueCallbackOpenClose(td.server);
             addValueCallbackDuty(td.server);
+            forceVal = 0;
+            openCloseVal = 2;
         }
 
 
