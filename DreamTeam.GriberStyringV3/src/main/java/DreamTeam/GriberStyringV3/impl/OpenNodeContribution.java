@@ -10,7 +10,7 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 	/*--------- Send to server variables ---------*/
 	private final String popupTitle = "From Open Node: ";
 	private final String message = "Open script executing";
-	private final String command = "0;000";
+	private final String command = "1;000";
 	private final String STATIC_IP_ADD = "10.125.45.176";
 	private final int STATIC_Port = 8080;
 	private final String socketName = "my_socket";
