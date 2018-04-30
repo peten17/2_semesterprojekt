@@ -28,11 +28,15 @@ int main()
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     cout << "Opc UA server running" << endl;
-    config->logger = UA_LOGLEVEL_FATAL;
     td.server = UA_Server_new(config);
     cout << "Opc UA server configured" << endl;
+    UA_Server_addRepeatedJob(td.server, addValueCallbackDuty(td.server), 2000, 1);
+    /*addValueCallbackGrips(td.server);
+    addValueCallbackForce(td.server);
+    addValueCallbackOpenClose(td.server);
+    addValueCallbackDuty(td.server);*/
 
-    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);    
+    rc = pthread_create(&threads, NULL, defineOPCUAServer, (void *) &td);
 
     if(rc)
     {
@@ -68,9 +72,6 @@ int main()
             openCloseBool = true;
             dutyCycle = 50;
 
-            addValueCallbackOpenClose(td.server);
-            addValueCallbackDuty(td.server);
-
             inputPoly = "";
         }
 
@@ -86,10 +87,7 @@ int main()
             force = atoi(inputPoly.substr(pos, 2));*/
             dutyCycle = 100;
 
-            addValueCallbackGrips(td.server);
-            addValueCallbackForce(td.server);
-            addValueCallbackOpenClose(td.server);
-            addValueCallbackDuty(td.server);
+
 
             inputPoly = "";
         }
