@@ -91,6 +91,11 @@ static void *defineOPCUAServer(void *threadarg)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
     retval = UA_Server_run(myData->server, &running);
+
+    addValueCallbackDuty(myData->server);
+    addValueCallbackForce(myData->server);
+    addValueCallbackGrips(myData->server);
+    addValueCallbackOpenClose(myData->server);
 }
 
 static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
@@ -99,15 +104,6 @@ static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            const UA_DataValue *data)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_CLIENT, NULL);
-}
-
-static void updateGrips(UA_Server *server)
-{
-    UA_NodeId gripsNodeId = UA_NODEID_STRING(1, aog);
-    UA_VariableAttributes gripsAAttr = UA_VariableAttributes_default;
-    //UA_Variant_setScalar(&gripsAAttr.value, &gripsAmount, &UA_TYPES[UA_TYPES_INT16]);
-    UA_Variant_setScalar(&gripsAAttr.value, &gripsNodeId, &UA_TYPES[UA_TYPES_INT16]);
-    UA_Server_writeValue(server, gripsNodeId, gripsAAttr.value);
 }
 
 static void beforeReadTimeGrips(UA_Server *server,
