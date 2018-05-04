@@ -144,6 +144,13 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 		return model.get(IP_KEY, "000.000.000.000");
 	}
 	
+//	public int getIPIn(){
+//		if (!model.isSet(IP_KEY)){
+//			model.set(IP_KEY, 0);
+//		}
+//		return model.get(IP_KEY, 0);
+//	}
+	
 	public int getPortIn(){
 		if (!model.isSet(PORT_KEY)){
 			model.set(PORT_KEY, 0);
@@ -165,6 +172,18 @@ public class GriberProgramNodeContribution implements ProgramNodeContribution {
 			}
 		}
 	}
+	
+//	@Input(id = IP_FIELD_ID)
+//	public void ipChange(InputEvent event){
+//		if (event.getEventType() == InputEvent.EventType.ON_CHANGE){
+//			if ("".equals(getIPIn())){
+//				ipIn.setText("0.0.0.0");
+//				model.set(IP_KEY, 0);
+//			} else {
+//				model.set(IP_KEY, ipIn.getText());
+//			}
+//		}
+//	}
 	
 	@Input(id = PORT_FIELD_ID)
 	public void portChange(InputEvent event){
