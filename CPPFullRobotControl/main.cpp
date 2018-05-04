@@ -72,6 +72,10 @@ int main()
 
             //forceVal = " ";
             bufString = "2";
+            addValueCallbackDuty(myData->server);
+            //addValueCallbackForce(myData->server);
+            addValueCallbackGrips(myData->server);
+            addValueCallbackOpenClose(myData->server);
 
         }
         else if(bufString == "0")
@@ -86,6 +90,10 @@ int main()
 
             //forceVal = " ";
             bufString = "2";
+            addValueCallbackDuty(myData->server);
+            //addValueCallbackForce(myData->server);
+            addValueCallbackGrips(myData->server);
+            addValueCallbackOpenClose(myData->server);
         }
 
 

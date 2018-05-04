@@ -25,7 +25,7 @@ struct thread_data
     UA_Server *server;
 };
 
-void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
+static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            void *sessionContext, const UA_NodeId *nodeId,
                            void *nodeContext, const UA_NumericRange *range,
                            const UA_DataValue *data)
@@ -33,7 +33,7 @@ void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_CLIENT, NULL);
 }
 
-void beforeReadTimeGrips(UA_Server *server,
+static void beforeReadTimeGrips(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
                            const UA_NumericRange *range, const UA_DataValue *data)
@@ -44,7 +44,7 @@ void beforeReadTimeGrips(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, gripsAAttr.value);
 }
 
-void beforeReadTimeDuty(UA_Server *server,
+static void beforeReadTimeDuty(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
                            const UA_NumericRange *range, const UA_DataValue *data)
@@ -55,7 +55,7 @@ void beforeReadTimeDuty(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, dutyAAttr.value);
 }
 
-void beforeReadTimeOpenClose(UA_Server *server,
+static void beforeReadTimeOpenClose(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
                            const UA_NumericRange *range, const UA_DataValue *data)
@@ -66,7 +66,7 @@ void beforeReadTimeOpenClose(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, openCloseAAttr.value);
 }
 
-void beforeReadTimeForce(UA_Server *server,
+static void beforeReadTimeForce(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
                            const UA_NumericRange *range, const UA_DataValue *data)
@@ -77,7 +77,7 @@ void beforeReadTimeForce(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, forceAAttr.value);
 }
 
-void addValueCallbackGrips(UA_Server *server)
+static void addValueCallbackGrips(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
     UA_ValueCallback callback;
@@ -86,7 +86,7 @@ void addValueCallbackGrips(UA_Server *server)
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
 
-void addValueCallbackForce(UA_Server *server)
+static void addValueCallbackForce(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, forceString);
     UA_ValueCallback callback;
@@ -95,7 +95,7 @@ void addValueCallbackForce(UA_Server *server)
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
 
-void addValueCallbackOpenClose(UA_Server *server)
+static void addValueCallbackOpenClose(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, openClose);
     UA_ValueCallback callback;
@@ -104,7 +104,7 @@ void addValueCallbackOpenClose(UA_Server *server)
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
 
-void addValueCallbackDuty(UA_Server *server)
+static void addValueCallbackDuty(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, dutyCycleString);
     UA_ValueCallback callback;
@@ -179,9 +179,4 @@ static void *defineOPCUAServer(void *threadarg)
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), forceAttr, NULL, NULL);
 
     retval = UA_Server_run(myData->server, &running);
-
-    addValueCallbackDuty(myData->server);
-    addValueCallbackForce(myData->server);
-    addValueCallbackGrips(myData->server);
-    addValueCallbackOpenClose(myData->server);
 }
