@@ -72,11 +72,10 @@ int main()
 
             //forceVal = " ";
             bufString = "2";
-            addValueCallbackDuty(myData->server);
+            addValueCallbackDuty(td.server);
             //addValueCallbackForce(myData->server);
-            addValueCallbackGrips(myData->server);
-            addValueCallbackOpenClose(myData->server);
-
+            addValueCallbackGrips(td.server);
+            addValueCallbackOpenClose(td.server);
         }
         else if(bufString == "0")
         {
@@ -90,10 +89,10 @@ int main()
 
             //forceVal = " ";
             bufString = "2";
-            addValueCallbackDuty(myData->server);
+            addValueCallbackDuty(td.server);
             //addValueCallbackForce(myData->server);
-            addValueCallbackGrips(myData->server);
-            addValueCallbackOpenClose(myData->server);
+            addValueCallbackGrips(td.server);
+            addValueCallbackOpenClose(td.server);
         }
 
 
