@@ -56,7 +56,7 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        char bufString = inputPoly.substr(0, 1);
+        string bufString = inputPoly.substr(0, 1);
         //char openCloseVal = atoi(bufString);
         /*bufString = inputPoly.substr(1, 3);
         char* forceVal[1024] = bufString;*/
