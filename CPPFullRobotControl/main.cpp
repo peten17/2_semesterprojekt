@@ -56,25 +56,25 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        string bufString = inputPoly.substr(0, 1);
-        char* openCloseVal[1] = bufString;
-        bufString = inputPoly.substr(1, 3);
-        char* forceVal[1024] = bufString;
+        char* bufString[16] = inputPoly.substr(0, 1);
+        int openCloseVal = atoi(bufString);
+        /*bufString = inputPoly.substr(1, 3);
+        char* forceVal[1024] = bufString;*/
 
-        if(openCloseVal == '1')
+        if(openCloseVal == 1)
         {
             cout << "Received open node." << endl;
             pwmWrite(18, 2);
 
             openCloseBool = true;
             dutyCycle = (2/range * 100);
-            force = atoi(forceVal);
+            //force = atoi(forceVal);
 
-            forceVal = " ";
-            openCloseVal = '2';
+            //forceVal = " ";
+            openCloseVal = 2;
 
         }
-        else if(openCloseVal == '0')
+        else if(openCloseVal == 0)
         {
             cout << "Received close node." << endl;
             pwmWrite(18, 10);
@@ -82,10 +82,10 @@ int main()
             openCloseBool = false;
             gripsAmount++;
             dutyCycle = (10/range * 100);
-            force = atoi(forceVal);
+            //force = atoi(forceVal);
 
-            forceVal = " ";
-            openCloseVal = '2';
+            //forceVal = " ";
+            openCloseVal = 2;
         }
 
 
