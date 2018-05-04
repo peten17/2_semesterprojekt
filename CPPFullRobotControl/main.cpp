@@ -47,6 +47,7 @@ int main()
     pwmSetMode(PWM_MODE_MS);
     pwmSetRange(range);
     pwmSetClock(1920);
+    pwmWrite(18, 10);
 
     Server c;
     c.serverBind();
