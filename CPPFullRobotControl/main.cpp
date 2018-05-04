@@ -56,8 +56,10 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        char openCloseVal = inputPoly.substr(0, 1);
-        char* forceVal[10] = inputPoly.substr(1, 3);
+        string bufString = inputPoly.substr(0, 1);
+        char openCloseVal = bufString;
+        bufString = inputPoly.substr(1, 3);
+        char* forceVal[1024] = bufString;
 
         if(openCloseVal == '1')
         {
@@ -68,7 +70,7 @@ int main()
             dutyCycle = (2/range * 100);
             force = atoi(forceVal);
 
-            forceVal = "";
+            forceVal = " ";
             openCloseVal = '2';
 
         }
@@ -82,7 +84,7 @@ int main()
             dutyCycle = (10/range * 100);
             force = atoi(forceVal);
 
-            forceVal = "";
+            forceVal = " ";
             openCloseVal = '2';
         }
 
