@@ -61,7 +61,7 @@ int main()
         /*bufString = inputPoly.substr(1, 3);
         char* forceVal[1024] = bufString;*/
 
-        if(bufString == '1')
+        if(bufString == "1")
         {
             cout << "Received open node." << endl;
             pwmWrite(18, 2);
@@ -71,10 +71,10 @@ int main()
             //force = atoi(forceVal);
 
             //forceVal = " ";
-            bufString = '2';
+            bufString = "2";
 
         }
-        else if(bufString == '0')
+        else if(bufString == "0")
         {
             cout << "Received close node." << endl;
             pwmWrite(18, 10);
@@ -85,7 +85,7 @@ int main()
             //force = atoi(forceVal);
 
             //forceVal = " ";
-            bufString = '2';
+            bufString = "2";
         }
 
 
