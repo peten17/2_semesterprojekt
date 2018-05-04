@@ -5,15 +5,14 @@
 #include <opcuavariable.cpp>
 #include <signal.h>
 
-
-#define NUMTHREADS 5
 using namespace std;
 
 void stopHandler(int sig)
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
-    running = false;
     t = false;
+    running = false;
+
 }
 
 static void *defineOPCUAServer(void *threadarg);
@@ -35,7 +34,7 @@ int main()
 
     if(rc)
     {
-        cout << "Unable to create thread, " << i << endl;
+        cout << "Unable to create thread" << i << endl;
     }
     else
     {
@@ -69,9 +68,6 @@ int main()
             dutyCycle = (2/range * 100);
             force = atoi(forceVal);
 
-            addValueCallbackOpenClose(td.server);
-            addValueCallbackDuty(td.server);
-            addValueCallbackForce(td.server);
             forceVal = "";
             openCloseVal = 2;
 
@@ -86,10 +82,6 @@ int main()
             dutyCycle = (10/range * 100);
             force = atoi(forceVal);
 
-            addValueCallbackGrips(td.server);
-            addValueCallbackForce(td.server);
-            addValueCallbackOpenClose(td.server);
-            addValueCallbackDuty(td.server);
             forceVal = "";
             openCloseVal = 2;
         }
