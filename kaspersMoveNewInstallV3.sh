@@ -13,6 +13,6 @@ cd /home/ur/Desktop/Projekt/2_semesterprojekt/DreamTeam.GriberStyringV3/target
 cp -rf GriberStyringV3-2.0-SNAPSHOT.urcap /home/ur/ursim-current/programs.UR5
 
 cd  /home/ur/Desktop/Projekt/2_semesterprojekt
-git .add
+git add .
 git commit
 git push
