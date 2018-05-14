@@ -55,6 +55,7 @@ public class OpenNodeContribution implements ProgramNodeContribution {
 		//attempt socket connection
 		writer.ifCondition("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
+		writer.appendLine("sleep(0.2)");
 		writer.appendLine("socket_close(socketName)");
 		writer.elseCondition();
 		writer.appendLine("popup(error, \"Connection error\", False, True, blocking = True)");

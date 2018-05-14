@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="/home/ur/.m2/repository/org/osgi/org.osgi.core/4.3.0/org.osgi.core-4.3.0.jar:/home/ur/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/ur/Desktop/Projekt/2_semesterprojekt/DreamTeam.GriberStyringV3/target/test-classes:/home/ur/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/ur/.m2/repository/com/ur/urcap/api/1.2.56/api-1.2.56.jar" destdir="/home/ur/Desktop/Projekt/2_semesterprojekt/URcap doc" doctitle="URcapJavadoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="DreamTeam.GriberStyringV3.impl" source="1.6" sourcepath="/home/ur/Desktop/Projekt/2_semesterprojekt/DreamTeam.GriberStyringV3/src/main/java:/home/ur/Desktop/Projekt/2_semesterprojekt/DreamTeam.GriberStyringV3/src/test/java:/home/ur/Desktop/Projekt/2_semesterprojekt/DreamTeam.GriberStyringV3/src/main/resources" splitindex="true" use="true" version="true">
+            <link href="jar:file:/home/ur/.m2/repository/com/ur/urcap/api/1.2.56/api-1.2.56-javadoc.jar!/"/>
+        </javadoc>
+    </target>
+</project>

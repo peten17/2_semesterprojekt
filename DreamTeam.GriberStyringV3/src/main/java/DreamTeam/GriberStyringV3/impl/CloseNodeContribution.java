@@ -5,6 +5,7 @@ import com.ur.urcap.api.domain.URCapAPI;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.ui.annotation.Input;
+import com.ur.urcap.api.ui.annotation.Label;
 import com.ur.urcap.api.ui.component.InputEvent;
 import com.ur.urcap.api.ui.component.InputRadioButton;
 import com.ur.urcap.api.ui.component.LabelComponent;
@@ -26,7 +27,10 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	@Input(id = RADIO100_ID)
 	public InputRadioButton radio100;
 	
-	@Input(id = LABEL_ID)
+//	@Input(id = LABEL_ID)
+//	public LabelComponent label;
+	
+	@Label(id = LABEL_ID)
 	public LabelComponent label;
 	
 	/*--------- Send to server variables ---------*/
@@ -112,6 +116,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 		//attempt socket connection
 		writer.ifCondition("socket_open(IP, port, socketName)");
 		writer.appendLine("socket_send_string(command, socketName)");
+		writer.appendLine("sleep(0.2)");
 		writer.appendLine("socket_close(socketName)");
 		writer.elseCondition();
 		writer.appendLine("popup(error, \"Connection error\", False, True, blocking = True)");
