@@ -48,7 +48,7 @@ public class CloseNodeContribution implements ProgramNodeContribution {
 	public void radio50Select(InputEvent event){
 		if (event.getEventType() == InputEvent.EventType.ON_CHANGE){
 			//label.setVisible(false);
-			force = "50";
+			force = "050";
 		}
 	}
 	

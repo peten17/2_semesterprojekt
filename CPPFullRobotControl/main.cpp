@@ -47,6 +47,7 @@ int main()
     pwmSetMode(PWM_MODE_MS);
     pwmSetRange(range);
     pwmSetClock(1920);
+    pwmWrite(18, 10);
 
     Server c;
     c.serverBind();
@@ -56,23 +57,28 @@ int main()
     {
         cout << "Currently listening..." << endl;
         string inputPoly(c.serverListen());
-        char openCloseVal = inputPoly.substr(0, 1);
-        char* forceVal[4] = inputPoly.substr(1, 3);
+        string bufString = inputPoly.substr(0, 1);
+        //char openCloseVal = atoi(bufString);
+        /*bufString = inputPoly.substr(1, 3);
+        char* forceVal[1024] = bufString;*/
 
-        if(openCloseVal == "1")
+        if(bufString == "1")
         {
             cout << "Received open node." << endl;
             pwmWrite(18, 2);
 
             openCloseBool = true;
             dutyCycle = (2/range * 100);
-            force = atoi(forceVal);
+            //force = atoi(forceVal);
 
-            forceVal = "";
-            openCloseVal = 2;
-
+            //forceVal = " ";
+            bufString = "2";
+            addValueCallbackDuty(td.server);
+            //addValueCallbackForce(myData->server);
+            addValueCallbackGrips(td.server);
+            addValueCallbackOpenClose(td.server);
         }
-        else if(openCloseVal == "0")
+        else if(bufString == "0")
         {
             cout << "Received close node." << endl;
             pwmWrite(18, 10);
@@ -80,10 +86,14 @@ int main()
             openCloseBool = false;
             gripsAmount++;
             dutyCycle = (10/range * 100);
-            force = atoi(forceVal);
+            //force = atoi(forceVal);
 
-            forceVal = "";
-            openCloseVal = 2;
+            //forceVal = " ";
+            bufString = "2";
+            addValueCallbackDuty(td.server);
+            //addValueCallbackForce(myData->server);
+            addValueCallbackGrips(td.server);
+            addValueCallbackOpenClose(td.server);
         }
 
 
