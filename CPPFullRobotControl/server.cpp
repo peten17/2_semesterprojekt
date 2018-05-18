@@ -3,7 +3,6 @@
 #define PORT 8080
 Server::Server()
 {
-    std::string msg = "Hello from server you fucking cunt";
     _hello  = &msg[0u];
     //Standard for Linux:
     _address.sin_family = AF_INET;

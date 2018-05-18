@@ -20,11 +20,13 @@ static UA_Int16 force = 0;
 static UA_NodeId robotId;
 
 static UA_Boolean running = true;
+//Data structure to store the server variable.
 struct thread_data
 {
     UA_Server *server;
 };
 
+//Defines the afterWriteTime for when updating an OPC UA variable.
 static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
                            void *sessionContext, const UA_NodeId *nodeId,
                            void *nodeContext, const UA_NumericRange *range,
@@ -32,7 +34,7 @@ static void afterWriteTime(UA_Server *server, const UA_NodeId *sessionId,
 {
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_CLIENT, NULL);
 }
-
+//The beforeReadTime functions updates the variable nodes that is linked to the object node. This is the same for the next 5.
 static void beforeReadTimeGrips(UA_Server *server,
                            const UA_NodeId *sessionId, void *sessionContext,
                            const UA_NodeId *nodeid, void *nodeContext,
@@ -77,6 +79,7 @@ static void beforeReadTimeForce(UA_Server *server,
     UA_Server_writeValue(server, currentNodeId, forceAAttr.value);
 }
 
+//the addValueCallback functions links together the beforeReadTime and the afterWrite time and calls the actual nodes.
 static void addValueCallbackGrips(UA_Server *server)
 {
     UA_NodeId currentNodeId = UA_NODEID_STRING(1, aog);
@@ -113,6 +116,7 @@ static void addValueCallbackDuty(UA_Server *server)
     UA_Server_setVariableNode_valueCallback(server, currentNodeId, callback);
 }
 
+//Defines the OPCUAServer
 static void *defineOPCUAServer(void *threadarg)
 {
     struct thread_data *myData;
