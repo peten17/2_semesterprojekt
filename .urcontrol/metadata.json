@@ -1,0 +1,12 @@
+{
+    "release_version": "3.5.0.10584", 
+    "modules": [
+        {
+            "build_date": "1510794277000", 
+            "artifact_version": "1.3.175", 
+            "name": "PolyScope"
+        }
+    ], 
+    "description": "", 
+    "build_date": "2017-11-16"
+}
